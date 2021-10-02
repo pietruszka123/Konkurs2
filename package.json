@@ -1,22 +1,24 @@
 {
-  "name": "konkurs2",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/pietruszka123/Konkurs2.git"
-  },
-  "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/pietruszka123/Konkurs2/issues"
-  },
-  "homepage": "https://github.com/pietruszka123/Konkurs2#readme",
-  "dependencies": {
-    "express": "^4.17.1"
-  }
+    "name": "konkurs2",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/pietruszka123/Konkurs2.git"
+    },
+    "author": "",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/pietruszka123/Konkurs2/issues"
+    },
+    "homepage": "https://github.com/pietruszka123/Konkurs2#readme",
+    "dependencies": {
+        "@ericblade/quagga2": "^1.4.2",
+        "express": "^4.17.1",
+        "nodemon": "^2.0.13"
+    }
 }
