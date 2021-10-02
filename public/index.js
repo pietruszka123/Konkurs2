@@ -19,4 +19,10 @@ Quagga.init({
     }
     console.log("Initialization finished. Ready to start");
     Quagga.start();
+    Quagga.onProcessed((e) => {
+        if (e != null) {
+            console.log(e)
+        }
+
+    })
 });
