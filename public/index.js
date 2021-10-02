@@ -1,14 +1,12 @@
-console.log(Quagga)
 Quagga.init({
     inputStream: {
         name: "Live",
         type: "LiveStream",
         target: document.querySelector('#yourElement'), // Or '#yourElement' (optional)
         constraints: {
-            width: 100,
-            height: 100,
+            width: 200,
+            height: 200,
             facingMode: "environment",
-            deviceId: "7832475934759384534"
         },
     },
     decoder: {
