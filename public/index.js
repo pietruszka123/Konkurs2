@@ -37,7 +37,8 @@ Quagga.init({
     Quagga.onProcessed((e) => {
         if (e != null) {
             if(e.codeResult){
-                document.getElementById("output").innerHTML = JSON.stringify(e.codeResult.code);;
+                document.getElementById("output").innerHTML = JSON.stringify(e.codeResult.code);
+                Quagga.stop();
             }
             console.log(e);
 
