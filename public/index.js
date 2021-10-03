@@ -4,9 +4,9 @@ Quagga.init({
         type: "LiveStream",
         target: document.querySelector('#yourElement'), // Or '#yourElement' (optional)
         constraints: {
-            //width: 200,
-            //height: 200,
-            //facingMode: "environment",
+            width: 200,
+            height: 200,
+            facingMode: "environment",
         },
     },
     decoder: {
@@ -37,7 +37,8 @@ Quagga.init({
     Quagga.onProcessed((e) => {
         if (e != null) {
             if(e.codeResult){
-                document.getElementById("output").innerHTML = JSON.stringify(e.codeResult.code);;
+                document.getElementById("output").innerHTML = JSON.stringify(e.codeResult.code);
+                Quagga.stop();
             }
             console.log(e);
 
