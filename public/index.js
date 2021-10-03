@@ -1,5 +1,3 @@
-
-
 Quagga.init({
     inputStream: {
         name: "Live",
@@ -12,7 +10,15 @@ Quagga.init({
         },
     },
     decoder: {
-        readers: ["code_128_reader"]
+        readers: ["upc_reader",
+            "upc_e_reader", "ean_8_reader", "ean_reader", "code_39_reader",
+            "code_39_vin_reader",
+            "codabar_reader",
+
+            "i2of5_reader",
+            "2of5_reader",
+            "code_93_reader", "code_128_reader"
+        ]
     }
 }, function(err) {
     if (err) {
@@ -22,17 +28,20 @@ Quagga.init({
     }
     console.log("Initialization finished. Ready to start");
     Quagga.start();
-    Quagga.onDetected((e)=>{
+    /*Quagga.onDetected((e) => {
         if (e != null) {
             console.log(e)
             document.body.innerHTML = "tak"
         }
-    })
+    })*/
     Quagga.onProcessed((e) => {
         if (e != null) {
-            console.log(e)
-            document.body.innerHTML = "ok"
+            const kod = Object.values(e.codeResult.code);
+            console.log(e);
+
+            document.body.innerHTML = kod;
         }
 
     })
+
 });
