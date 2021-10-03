@@ -15,13 +15,21 @@ Quagga.init({
 }, function(err) {
     if (err) {
         console.log(err);
+        document.body.innerHTML = err
         return
     }
     console.log("Initialization finished. Ready to start");
     Quagga.start();
+    Quagga.onDetected((e)=>{
+        if (e != null) {
+            console.log(e)
+            document.body.innerHTML = e.codeResult.code
+        }
+    })
     Quagga.onProcessed((e) => {
         if (e != null) {
             console.log(e)
+            document.body.innerHTML = "ok"
         }
 
     })
