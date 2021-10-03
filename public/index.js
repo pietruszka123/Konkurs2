@@ -14,7 +14,6 @@ Quagga.init({
             "upc_e_reader", "ean_8_reader", "ean_reader", "code_39_reader",
             "code_39_vin_reader",
             "codabar_reader",
-
             "i2of5_reader",
             "2of5_reader",
             "code_93_reader", "code_128_reader"
@@ -36,10 +35,14 @@ Quagga.init({
     })*/
     Quagga.onProcessed((e) => {
         if (e != null) {
-            const kod = Object.values(e.codeResult.code);
-            console.log(e);
+            if (e.codeResult) {
+                const kod = Object.values(e.codeResult.code);
 
-            document.body.innerHTML = kod;
+
+                document.getElementById("test").innerHTML = kod;
+                Quagga.stop()
+            }
+            console.log(e);
         }
 
     })
