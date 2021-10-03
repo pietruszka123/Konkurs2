@@ -1,3 +1,5 @@
+
+
 Quagga.init({
     inputStream: {
         name: "Live",
