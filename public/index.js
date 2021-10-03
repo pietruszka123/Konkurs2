@@ -36,10 +36,13 @@ Quagga.init({
     })*/
     Quagga.onProcessed((e) => {
         if (e != null) {
-            const kod = Object.values(e.codeResult.code);
+            if (e.codeResult) {
+                document.getElementById("output").innerHTML = JSON.stringify(e.codeResult.code);
+                Quagga.stop();
+            }
             console.log(e);
 
-            document.body.innerHTML = kod;
+
         }
 
     })
