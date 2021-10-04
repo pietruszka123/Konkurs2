@@ -7,7 +7,7 @@ a poza tym jest strasznie wolny
 
 ## **jak uzyskać produkt z przeglądarki**
 <!-- - javascript -->
-```javasript
+```javascript
 var xhr = new XMLHttpRequest();
 xhr.open("POST", "/getProduct.json", true);
 xhr.setRequestHeader('Content-Type', 'application/json');
