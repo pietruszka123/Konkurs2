@@ -4,8 +4,8 @@ Quagga.init({
         type: "LiveStream",
         target: document.querySelector('#yourElement'), // Or '#yourElement' (optional)
         constraints: {
-            width: 200,
-            height: 200,
+            //width: 200,
+            //height: 200,
             facingMode: "environment",
         },
     },
@@ -38,6 +38,7 @@ Quagga.init({
         if (e != null) {
             if(e.codeResult){
                 document.getElementById("output").innerHTML = JSON.stringify(e.codeResult.code);
+                
                 Quagga.stop();
             }
             console.log(e);
@@ -48,3 +49,17 @@ Quagga.init({
     })
 
 });
+document.getElementById("przycisk").addEventListener("click",getProduct)
+function getProduct(e)
+{
+    var xhr = new XMLHttpRequest();
+    xhr.open("POST", "/getProduct.json", true);
+    xhr.setRequestHeader('Content-Type', 'application/json');
+    xhr.onreadystatechange = function() {
+        if (xhr.readyState === 4) {
+          console.log(JSON.parse(xhr.response))
+        }
+      }
+    xhr.send(JSON.stringify({productCode:"5449000000996"}));
+    
+}

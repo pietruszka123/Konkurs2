@@ -1,3 +1,4 @@
+process.env['NODE_TLS_REJECT_UNAUTHORIZED'] = 0;
 
 const express = require("express");
 
@@ -29,7 +30,7 @@ app.post("/getProduct.json", (req, res, next) => {
         openfoodfacts.getProduct(req.body.productCode).then((ret) => {
             res.writeHead(200, head
             )
-            res.end(JSON.stringify(ret))
+            res.end(ret)
             next()
         })
     } else {

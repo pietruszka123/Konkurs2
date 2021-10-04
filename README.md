@@ -1,10 +1,5 @@
 # Konkurs2
 
-
-## puppeteer przekracza 100MB limit githuba
-a poza tym jest strasznie wolny
-- npm install puppeteer
-
 ## **jak uzyskać produkt z przeglądarki**
 <!-- - javascript -->
 ```javasript

@@ -1,0 +1,54 @@
+/* Color Theme Swatches in Hex */
+*{
+    margin: 0;
+    padding: 0;
+}
+
+html{
+--zielony1: #29D955;
+--zielony2: #67BF5A;
+--zielony3: #5EA653;
+--bialy: #F2F2F2;
+--bialawy: #cfcfcf;
+--szarawy: #A2A2A2;
+--szary: #595959; 
+background-color: var(--bialy);
+}
+
+
+
+body{
+    display: flex;
+}
+.lewa{
+    width: 49.75%;
+}
+.przedzial{
+    margin-left: 0.25%;
+    margin-right: 0.25%;
+    width: 1px;
+    background-color: black;
+}
+.prawa{
+    width: 49.75%;
+}
+#inputText{
+    background-color: var(--bialy);
+    border-style:none;
+    border-radius: 3px;
+    filter: drop-shadow(0px 0px 2px #000000);
+}
+#inputText:focus{
+    background-color: var(--bialy);
+    border-style:none;
+    border-radius: 3px;
+    outline: none;
+    filter: drop-shadow(0px 0px 2px #000000);
+}
+#przycisk{
+    background-color: var(--zielony3);
+    border-style:none;
+    border-radius: 3px;
+    filter: drop-shadow(0px 0px 2px #000000);
+    width: 10%;
+}
