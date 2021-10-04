@@ -60,6 +60,5 @@ function getProduct(e)
           console.log(JSON.parse(xhr.response))
         }
       }
-    xhr.send(JSON.stringify({productCode:"5449000000996"}));
-    
+    xhr.send(JSON.stringify({productCode:document.getElementById("inputText").value}));
 }
