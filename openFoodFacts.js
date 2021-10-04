@@ -1,6 +1,6 @@
 const https = require('https')
 var http = require('http');
-const config = require("./config.json")
+const config = require("./config.json");
 
 module.exports.getProduct = async function getProduct(productCode) {
     return new Promise((resolve, reject) => {
@@ -16,7 +16,6 @@ module.exports.getProduct = async function getProduct(productCode) {
           bodyChunks.push(chunk);
         }).on('end', function() {
           var body = Buffer.concat(bodyChunks);
-          console.log("end")
           resolve(body)
         })
       });
