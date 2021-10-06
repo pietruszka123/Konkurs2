@@ -1,5 +1,5 @@
 # Konkurs2
-
+# nie sportowane do końca
 ## **jak uzyskać produkt z przeglądarki**
 <!-- - javascript -->
 ```javascript
