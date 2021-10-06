@@ -42,3 +42,65 @@ app.post("/getProduct.json", (req, res, next) => {
         next()
     }
 })
+
+
+
+
+function sanitize(string) {
+    const map = {
+        '&': '&amp;',
+        '<': '&lt;',
+        '>': '&gt;',
+        '"': '&quot;',
+        "'": '&#x27;',
+        "/": '&#x2F;',
+        "`": '&grave'
+    };
+    const reg = /[&<>"'/]/ig;
+    return string.replace(reg, (match) => (map[match]));
+}
+
+
+kodKreskowy = 0;
+var bodyParser = require('body-parser');
+var urlencodedParser = bodyParser.urlencoded({ extended: false });
+
+const { response } = require("express");
+var mysql = require('mysql');
+
+var con = mysql.createConnection({
+    host: "localhost",
+    user: "root",
+    password: "",
+    database: "ecohelper"
+});
+
+con.connect(function (erroro) {
+    if (erroro) throw erroro;
+wynik = {};
+
+app.post('/', urlencodedParser, function (req, res) {
+    kodKreskowy = (sanitize(req.body.kodProduktu));
+
+    sql = "SELECT * FROM ecohelper WHERE codeProduct = " + kodKreskowy;
+    
+    
+        con.query(sql, function (erroro, result, fields) {
+            if (erroro) throw erroro;
+            sql = "";
+            wynik = result;
+            console.log(result[0].codeProduct);
+            sendDataToClient();
+        });
+    })
+
+    console.log(kodKreskowy);
+
+});
+function sendDataToClient(){
+app.get('/info', function (req, res) {
+    res.setHeader("Access-Control-Allow-Origin", "*");
+    res.json(wynik); //replace with your data here
+});}
+
+app.listen(3000);
