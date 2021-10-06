@@ -87,13 +87,13 @@ body{
     max-width: 300px;
     width: 300px; 
     height: 300px; 
-    border: solid 10px rgb(255, 0, 0);
+    box-shadow: 0px 0px 7px 1px #00000099;
     overflow: hidden;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    margin-top: -80px;
+    margin-top: -100px;
 }
 
 .informacje {
@@ -107,6 +107,15 @@ body{
 .komentarze {
     background-color: var(--bialy);
     box-shadow: 0px 0px 7px 1px #00000099;
-    width: 700px;
+    width: 680px;
     height: 300px;
+}
+
+.tekstInf {
+    margin: 30px;
+}
+
+.tekstInf > p {
+    margin-bottom: 6px;
+    font-family: 'Source Sans Pro', sans-serif;
 }
