@@ -1,3 +1,6 @@
+/*
+do usunięcia
+*/
 var t = document.createElement("video")
 t.id = "video"
 document.getElementsByClassName("kamerka")[0].append(t);
