@@ -1,4 +1,3 @@
-
 function sendGetProduct(toSend) {
     return new Promise((resolve, reject) => {
         var xhr = new XMLHttpRequest();
@@ -13,7 +12,7 @@ function sendGetProduct(toSend) {
         xhr.send(JSON.stringify({ productCode: toSend }));
     })
 }
-Quagga.init({
+/*Quagga.init({
     inputStream: {
         name: "Live",
         type: "LiveStream",
@@ -48,7 +47,7 @@ Quagga.init({
             console.log(e)
             document.body.innerHTML = "tak"
         }
-    })*/
+    })* /
     Quagga.onProcessed((e) => {
         if (e != null) {
             if (e.codeResult) {
@@ -73,10 +72,46 @@ Quagga.init({
 
     })
 
-});
+});*/
+let selectedDeviceId;
+const codeReader = new ZXing.BrowserBarcodeReader()//new ZXing.BrowserQRCodeReader()
+var canvas = document.getElementById("canvas")
+var video = document.getElementById("video")
+
+var ctx = canvas.getContext('2d');
+//const hints = new Map();
+const formats = [ZXing.BarcodeFormat.EAN_13, ZXing.BarcodeFormat.QR_CODE, ZXing.BarcodeFormat.CODE_128];
+//codeReader.hints =hints;
+//hints.set(ZXing.DecodeHintType.POSSIBLE_FORMATS, formats);
+codeReader.listVideoInputDevices()
+    .then((videoInputDevices) => {
+        console.log(videoInputDevices)
+        selectedDeviceId = videoInputDevices[1].deviceId;
+    })
+codeReader.decodeFromVideoDevice(selectedDeviceId, 'video', (result, err) => {
+    if (result) {
+        canvas.height = video.videoHeight;
+        canvas.width = video.videoWidth;
+        console.log(result)
+        ctx.beginPath();
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        var x = result.resultPoints[0].x;
+        var y = result.resultPoints[0].y;
+        var x1 = result.resultPoints[1].x - x;
+        var y1 = result.resultPoints[1].y - y;
+        ctx.rect(x, y, x, y);
+        ctx.stroke();
+        //document.getElementById('result').textContent = result.text
+    }
+    if (err && !(err instanceof ZXing.NotFoundException)) {
+        console.error(err)
+        //document.getElementById('result').textContent = err
+    }
+})
+console.log(`Started continous decode from camera with id ${selectedDeviceId}`)
 document.getElementById("przycisk").addEventListener("click", getProduct)
 function getProduct(e) {
-    sendGetProduct(document.getElementById("inputText").value).then((r)=>{
-        
+    sendGetProduct(document.getElementById("inputText").value).then((r) => {
+
     })
 }
