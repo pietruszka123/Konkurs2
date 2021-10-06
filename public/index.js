@@ -1,3 +1,4 @@
+
 function sendGetProduct(toSend) {
     return new Promise((resolve, reject) => {
         var xhr = new XMLHttpRequest();
@@ -51,9 +52,19 @@ Quagga.init({
     Quagga.onProcessed((e) => {
         if (e != null) {
             if (e.codeResult) {
-                document.getElementById("output").innerHTML = JSON.stringify(e.codeResult.code);
-                
+                //document.getElementById("output").innerHTML = JSON.stringify(e.codeResult.code);
                 Quagga.stop();
+                sendGetProduct(e.codeResult.code).then((r)=>{
+                    var info = document.getElementsByClassName("informacje")[0]
+                    console.log(r)
+                    if(r.status == 1){
+                        info.innerHTML = `<p>Nazwa produktu: ${r.product.inputStreamproduct_name} ${r.product.brands}</p>
+                        <p>Opakowanie: ${r.product.packaging}</p>
+                        <p>Coś tam coś</p>
+                        <p>I inne takie fajne informacje</p>`
+                    }
+                })
+                
             }
             console.log(e);
 

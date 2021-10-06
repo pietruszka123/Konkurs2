@@ -3,6 +3,7 @@ var http = require('http');
 const config = require("./config.json");
 
 module.exports.getProduct = async function getProduct(productCode) {
+    console.log(productCode)
     return new Promise((resolve, reject) => {
     var options = {
         host: 'world.openfoodfacts.org',
@@ -10,6 +11,7 @@ module.exports.getProduct = async function getProduct(productCode) {
       };
       
       var req = http.get(options, function(res) {
+        console.log(res.statusCode)
         if(res.statusCode != 200)resolve(JSON.stringify({status:0,status_verbose:"server Error",code:productCode}))
         var bodyChunks = [];
         res.on('data', function(chunk) {
