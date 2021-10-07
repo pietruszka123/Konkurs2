@@ -33,7 +33,9 @@ body{
     margin-left: 0.25%;
     margin-right: 0.25%;
     width: 1px;
-    background-color: black;
+    background-color: rgba(57, 57, 57, 0.5);
+    margin-top: 20px;
+    margin-bottom: 20px;
 }
 .prawa{
     width: 49.75%;
@@ -109,6 +111,63 @@ body{
     box-shadow: 0px 0px 7px 1px #00000099;
     width: 680px;
     height: 300px;
+    overflow-y: scroll;
+    overflow-x: unset;
+}
+
+.komentarze > .zbiorKomentarzy > .komentarz {
+    margin-bottom: 6px;
+    font-family: 'Source Sans Pro', sans-serif;
+    background-color: #ebebeb;
+    border-radius: 10px;
+    padding: 6px;
+    margin-bottom: 16px;
+}
+
+.komentarze > .zbiorKomentarzy > .wpisywanieKomentarzy {
+    position: absolute;
+    margin-top: 230px;
+    margin-left: -30px;
+    background-color: #ebebeb;
+    width: 643.5px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    padding-left: 20px;
+}
+
+.komentarze > .zbiorKomentarzy > .komentarz:nth-child(2) {
+    box-shadow: 0px 0px 10px 1px rgba(199, 176, 43, 0.5);
+}
+
+.komentarze > .zbiorKomentarzy > .komentarz > p {
+    font-family: 'Source Sans Pro', sans-serif;
+}
+
+.komentarze > .zbiorKomentarzy > .komentarz > .miejsce > p {
+    font-weight: 800;
+    margin: 1.5px;
+}
+
+.komentarze > .zbiorKomentarzy > .komentarz > .miejsce {
+    border-radius: 100px;
+    max-width: min-content;
+}
+
+.komentarze > .zbiorKomentarzy > .komentarz > .m1 {
+    background-color: gold;
+}
+
+.komentarze > .zbiorKomentarzy > .komentarz > .m2 {
+    background-color: rgb(167, 167, 167);
+}
+
+.komentarze > .zbiorKomentarzy > .komentarz > .m3 {
+    background-color: rgb(223, 113, 11);
+}
+
+.komentarze > .zbiorKomentarzy {
+    margin: 30px;
 }
 
 .tekstInf {
@@ -118,4 +177,34 @@ body{
 .tekstInf > p {
     margin-bottom: 6px;
     font-family: 'Source Sans Pro', sans-serif;
+}
+
+#komentarzInput {
+    background-color: var(--bialy);
+    border-style:none;
+    border-radius: 3px;
+    filter: drop-shadow(0px 0px 2px #000000);
+    width: 380px;
+    padding: 6px;
+    font-size: 75%;
+}
+
+#komentarzInput:focus {
+    background-color: var(--bialy);
+    border-style:none;
+    border-radius: 3px;
+    filter: drop-shadow(0px 0px 2px #000000);
+    width: 380px;
+    padding: 6px;
+    outline: none;
+    font-size: 75%;
+}
+
+#komentarzSubmit {
+    background-color: var(--zielony3);
+    border-style:none;
+    border-radius: 3px;
+    filter: drop-shadow(0px 0px 2px #000000);
+    width: 30px;
+    height: 26.6px;
 }
