@@ -93,6 +93,10 @@ codeReader.decodeFromVideoDevice(selectedDeviceId, 'video', (result, err) => {
         canvas.height = video.videoHeight;
         canvas.width = video.videoWidth;
         console.log(result)
+        codeReader.stopContinuousDecode()
+        sendGetProduct(result.text).then((r) => {
+            console.log(r)
+        })
         ctx.beginPath();
         ctx.clearRect(0, 0, canvas.width, canvas.height);
         var x = result.resultPoints[0].x;
@@ -101,6 +105,7 @@ codeReader.decodeFromVideoDevice(selectedDeviceId, 'video', (result, err) => {
         var y1 = result.resultPoints[1].y - y;
         ctx.rect(x, y, x, y);
         ctx.stroke();
+        video.pause()
         //document.getElementById('result').textContent = result.text
     }
     if (err && !(err instanceof ZXing.NotFoundException)) {
@@ -112,6 +117,6 @@ console.log(`Started continous decode from camera with id ${selectedDeviceId}`)
 document.getElementById("przycisk").addEventListener("click", getProduct)
 function getProduct(e) {
     sendGetProduct(document.getElementById("inputText").value).then((r) => {
-
+        console.log(r)
     })
 }
