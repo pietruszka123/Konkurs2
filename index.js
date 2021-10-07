@@ -2,6 +2,8 @@ process.env['NODE_TLS_REJECT_UNAUTHORIZED'] = 0;
 
 const express = require("express");
 
+const fs = require("fs")
+
 const mysql = require('mysql');
 
 const openfoodfacts = require("./openFoodFacts")
@@ -41,6 +43,11 @@ app.post("/getProduct.json", (req, res, next) => {
         next()
     }
 })
+var stringToHTML = function (str) {
+	var parser = new DOMParser();
+	var doc = parser.parseFromString(str, 'text/html');
+	return doc.body;
+};
 
 
 
@@ -84,5 +91,25 @@ con.connect(function (erroro) {
             res.end(JSON.stringify({error: "no product code in Request"}))
             next()
         }
+    })
+    app.get("/product/:productID",(req,res,next)=>{
+        var sql = "SELECT * FROM ecohelper WHERE codeProduct = " + req.params.productID;
+        if(req.params.productID.match(/^[0-9]+$/) != null){
+        con.query(sql,(err,result,f)=>{
+            if(err){
+                res.send("DataBaseError")
+                return
+            }
+            console.log(req.params)
+            res.statusCode = 200
+            var file = fs.readFileSync("./public/index.html")
+            var files = file.toString('utf8');
+            files = files.replace(`<meta name="productData" content="null">`,`<meta name="productData" content='${JSON.stringify(result)}'  >`)
+            //res.sendFile('public/index.html', {root: __dirname })
+            res.send(files)
+        })
+    }else{
+        res.sendFile('public/index.html', {root: __dirname })
+    }
     })
 })

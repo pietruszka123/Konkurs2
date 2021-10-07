@@ -1,3 +1,37 @@
+document.addEventListener("DOMContentLoaded", function(){
+    var product = document.head.querySelector("[name~=productData][content]").content;
+    if(product != "null"){
+        try {
+            var comments = JSON.parse(product)
+            console.log(comments[0])
+            updateInfo(comments[0].codeProduct,false)
+            setComments(JSON.parse(comments[0].comments));
+        } catch (error) {
+            console.error(error)
+        }
+    }
+});
+function setComments(r){
+    var comments = r.comments;
+    var commentContainer = document.getElementsByClassName("zbiorKomentarzy")[0]
+    if(addCommentObj == undefined)addCommentObj = commentContainer.childNodes[1];
+    comments.sort((a, b) => {
+        return a.commentPoints - b.commentPoints;
+    });
+    comments.reverse()
+    commentContainer.innerHTML = "";
+    commentContainer.append(addCommentObj)
+    for (let i = 0; i < comments.length; i++) {
+        console.log(i)
+        
+        console.log(comments[i])
+        var a = `<div class="komentarz">
+    <div class="miejsce ${(i < 3) ? `m${i+1}` : ""}"><p>#${i+1}</p></div>
+    <div class="wiadomosc">${comments[i].commentContent}<p></p></div>
+</div>`
+    commentContainer.insertAdjacentHTML('beforeend',a)
+    }
+}
 function sendGetProduct(toSend) {
     return new Promise((resolve, reject) => {
         var xhr = new XMLHttpRequest();
@@ -14,7 +48,7 @@ function sendGetProduct(toSend) {
     })
 }
 function sendGetFromDataBase(toSend) {
-    return new Promise((resolve,reject)=>{
+    return new Promise((resolve, reject) => {
         var xhr = new XMLHttpRequest();
         xhr.open("POST", "/getProductB.json", true);
         xhr.setRequestHeader('Content-Type', 'application/json');
@@ -28,9 +62,11 @@ function sendGetFromDataBase(toSend) {
         xhr.send(JSON.stringify({ productCode: toSend }));
     })
 }
-function updateInfo(tosend) {
+var addCommentObj;
+function updateInfo(tosend,comm) {
     sendGetProduct(tosend).then((r) => {
         if (!r.product) return
+        history.pushState('witaj jeśli widzisz tą wiadomosc to cos', 'EcoHelper', `/product/${tosend}`);
         var product = r.product
         console.log(r)
         var a = `<h3>Nazwa produktu:</h3>
@@ -43,12 +79,11 @@ function updateInfo(tosend) {
         <p> </p>`
         document.getElementsByClassName("tekstInf")[0].innerHTML = a
     })
-    sendGetFromDataBase(tosend).then((r)=>{
-        var a = `<div class="komentarz">
-        <div class="miejsce m1"><p>#1</p></div>
-        <div class="wiadomosc">Trzeba wywalić do kosza. Nie umiesz zrobić czegoś tak banalnego? Czemu? Gdzie ja żyje? Jaki to świat? Przez kogo jestem zdominowany?...<p></p></div>
-    </div>`
+    if(comm){
+    sendGetFromDataBase(tosend).then((r) => {
+        setComments(JSON.parse(r[0].comments))
     })
+    }
 }
 Quagga.init({
     inputStream: {
