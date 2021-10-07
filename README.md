@@ -1,2 +1,2 @@
-#*Do usunięcia*
+#Do usunięcia
 #połączone z main
