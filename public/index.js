@@ -86,7 +86,7 @@ const formats = [ZXing.BarcodeFormat.EAN_13, ZXing.BarcodeFormat.QR_CODE, ZXing.
 codeReader.listVideoInputDevices()
     .then((videoInputDevices) => {
         console.log(videoInputDevices)
-        selectedDeviceId = videoInputDevices[1].deviceId;
+        selectedDeviceId = videoInputDevices[0].deviceId;
     })
 codeReader.decodeFromVideoDevice(selectedDeviceId, 'video', (result, err) => {
     if (result) {
