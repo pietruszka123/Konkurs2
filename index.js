@@ -92,6 +92,26 @@ con.connect(function (erroro) {
             next()
         }
     })
+    app.post("/addComment.json",(req,res,next)=>{
+        if(req.body && req.body.comment && req.body.productCode){
+            console.log("add")
+            var commentObject = {"commentContent": req.body.comment,"commentPoints": 0}
+            console.log(JSON.stringify(commentObject))
+            var sql = `UPDATE ecohelper SET comments = JSON_ARRAY_APPEND(comments,'$.comments',JSON_OBJECT("commentContent","${commentObject.commentContent}","commentPoints","${commentObject.commentPoints}")) WHERE codeProduct = ${req.body.productCode}`
+            console.log(sql)
+            con.query(sql,(err, result, f)=>{
+                if(err){
+                    console.log(err)
+                    res.writeHead(404, head)
+                    res.end(JSON.stringify({error: "Error?"}))
+                    return
+                }
+                console.log(result)
+                res.writeHead(200, head)
+                res.end(JSON.stringify(result))
+            })
+        }
+    })
     app.get("/product/:productID",(req,res,next)=>{
         var sql = "SELECT * FROM ecohelper WHERE codeProduct = " + req.params.productID;
         if(req.params.productID.match(/^[0-9]+$/) != null){
@@ -104,7 +124,7 @@ con.connect(function (erroro) {
             res.statusCode = 200
             var file = fs.readFileSync("./public/index.html")
             var files = file.toString('utf8');
-            files = files.replace(`<meta name="productData" content="null">`,`<meta name="productData" content='${JSON.stringify(result)}'  >`)
+            if(result && result.length)files = files.replace(`<meta name="productData" content="null">`,`<meta name="productData" content='${JSON.stringify(result)}'><meta name="productID" content=${req.params.productID}>`)
             //res.sendFile('public/index.html', {root: __dirname })
             res.send(files)
         })

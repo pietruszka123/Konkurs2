@@ -1,8 +1,14 @@
 document.addEventListener("DOMContentLoaded", function(){
     var product = document.head.querySelector("[name~=productData][content]").content;
+    var productID = document.head.querySelector("[name~=productID][content]");
+    console.log(product)
+    if(productID){
+        window.productCode = productID.content
+    }
     if(product != "null"){
         try {
             var comments = JSON.parse(product)
+            console.log(comments)
             console.log(comments[0])
             updateInfo(comments[0].codeProduct,false)
             setComments(JSON.parse(comments[0].comments));
@@ -31,7 +37,9 @@ function setComments(r){
 </div>`
     commentContainer.insertAdjacentHTML('beforeend',a)
     }
+    initSendComment()
 }
+//#region requests
 function sendGetProduct(toSend) {
     return new Promise((resolve, reject) => {
         var xhr = new XMLHttpRequest();
@@ -62,11 +70,28 @@ function sendGetFromDataBase(toSend) {
         xhr.send(JSON.stringify({ productCode: toSend }));
     })
 }
+function sendNewComment(tosend){
+    return new Promise((resolve, reject) => {
+        var xhr = new XMLHttpRequest();
+        xhr.open("POST", "/addComment.json", true);
+        xhr.setRequestHeader('Content-Type', 'application/json');
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState === 4) {
+                //if(!xhr.response.product)return;
+                console.log(JSON.parse(xhr.response))
+                resolve(JSON.parse(xhr.response))
+            }
+        }
+        xhr.send(JSON.stringify(tosend));
+    })
+}
+//#endregion
 var addCommentObj;
 function updateInfo(tosend,comm) {
     sendGetProduct(tosend).then((r) => {
         if (!r.product) return
         history.pushState('witaj jeśli widzisz tą wiadomosc to cos', 'EcoHelper', `/product/${tosend}`);
+        window.productCode = tosend;
         var product = r.product
         console.log(r)
         var a = `<h3>Nazwa produktu:</h3>
@@ -135,7 +160,28 @@ Quagga.init({
     })
 
 });
+//#region Events
 document.getElementById("przycisk").addEventListener("click", getProduct)
+function initSendComment(){
+document.getElementById("komentarzSubmit").addEventListener("click",(e)=>{
+    console.log("click")
+    var text = document.getElementById("komentarzInput").value
+    text.trim()
+    if(!e.target.wait)e.target.wait = false
+    if(text.length != 0 && window.productCode && !e.target.wait){
+        e.target.wait = true
+        document.getElementById("komentarzInput").value = ""
+        sendNewComment({productCode: window.productCode,comment:text}).then((r)=>{
+            setTimeout(()=>{
+                e.target.wait = false
+            },5000)
+        });
+    }else{
+        //cooldown
+    }
+})
+}
+//#endregion
 function getProduct(e) {
     updateInfo(document.getElementById("inputText").value)
 }
