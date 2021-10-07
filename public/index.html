@@ -21,23 +21,8 @@
 
     <section class="lewa">
         <div class="kamerka" id="yourElement"></div>
-        <form id="formularz" method="POST" action="/">
             <input class="bialy" id="inputText" type="text" name="kodProduktu" placeholder="Wpisz kod produktu">
-            <input onclick="getData()" class="przycisk" id="przycisk" type="submit" value="wyslij">
-        </form>
-        <script>
-            function getData(){
-                $.ajax({
-      url:"http://localhost:3000/info",
-      type: 'GET',
-      dataType: 'json',
-      success : function(data){
-        //data is a variable containing the returned data
-        console.log(data[0]);
-      }
-    })};
-    
-            </script>
+            <input class="przycisk" id="przycisk" type="submit" value="wyslij">
     </section>
     <div class="przedzial"></div>
     <section class="prawa">

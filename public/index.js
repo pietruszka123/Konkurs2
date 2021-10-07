@@ -1,11 +1,12 @@
 function sendGetProduct(toSend) {
     return new Promise((resolve, reject) => {
         var xhr = new XMLHttpRequest();
-        xhr.open("POST", "/getProduct.json", true);
+        xhr.open("POST", "/getProductB.json", true);
         xhr.setRequestHeader('Content-Type', 'application/json');
         xhr.onreadystatechange = function () {
             if (xhr.readyState === 4) {
                 console.log(JSON.parse(xhr.response))
+                document.getElementsByClassName("tekstInf")[0].innerHTML = xhr.response
                 resolve(JSON.parse(xhr.response))
             }
         }
