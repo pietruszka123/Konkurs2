@@ -18,7 +18,9 @@
     "homepage": "https://github.com/pietruszka123/Konkurs2#readme",
     "dependencies": {
         "@ericblade/quagga2": "^1.4.2",
+        "body-parser": "^1.19.0",
         "express": "^4.17.1",
+        "mysql": "^2.18.1",
         "nodemon": "^2.0.13"
     }
 }

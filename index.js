@@ -2,6 +2,8 @@ process.env['NODE_TLS_REJECT_UNAUTHORIZED'] = 0;
 
 const express = require("express");
 
+const mysql = require('mysql');
+
 const openfoodfacts = require("./openFoodFacts")
 const config = require("./config.json")
 
@@ -34,11 +36,53 @@ app.post("/getProduct.json", (req, res, next) => {
             next()
         })
     } else {
-        res.writeHead(404, {
-            'Content-Type': 'text/html; charset=utf-8',
-            'X-Powered-By': config["x-Powered-By"]
-        })
-        res.end("no product code in Request")
+        res.writeHead(404, head)
+        res.end(JSON.stringify({error: "no product code in Request"}))
         next()
     }
+})
+
+
+
+
+var con = mysql.createConnection({
+    host: "localhost",
+    user: "root",
+    password: "",
+    database: "ecohelper"
+});
+con.connect(function (erroro) {
+    if (erroro){
+    console.error(erroro);
+    return
+    }
+
+    app.post("/getProductB.json", (req, res, next) => {
+        if (req.body && req.body.productCode) {
+            if(req.body.productCode.match(/^[0-9]+$/) != null){
+                var kodKreskowy = parseInt(req.body.productCode)
+                var sql = "SELECT * FROM ecohelper WHERE codeProduct = " + kodKreskowy;
+                con.query(sql, function (erroro, result, fields) {
+                    if (erroro){
+                        console.log(erroro)
+                        res.writeHead(412, head)
+                        res.end(JSON.stringify({error: "server error"}))
+                        return
+                    };
+                    if(!result[0]){
+                        res.writeHead(404, head)
+                        res.end(JSON.stringify({error: "Product not found"}))
+                        return
+                    }
+                    console.log(result[0].codeProduct);
+                    res.writeHead(200, head)
+                    res.end(JSON.stringify(result))
+                });
+            }
+        }else{
+            res.writeHead(404, head)
+            res.end(JSON.stringify({error: "no product code in Request"}))
+            next()
+        }
+    })
 })
