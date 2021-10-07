@@ -1,4 +1,5 @@
 document.addEventListener("DOMContentLoaded", function(){
+    window.commentsLength = 0
     var product = document.head.querySelector("[name~=productData][content]").content;
     var productID = document.head.querySelector("[name~=productID][content]");
     console.log(product)
@@ -17,6 +18,13 @@ document.addEventListener("DOMContentLoaded", function(){
         }
     }
 });
+function addComment(addto,commentObj,i,after =false){
+    var a = `<div class="komentarz">
+    <div class="miejsce ${(i < 3) ? `m${i+1}` : ""}"><p>#${i+1}</p></div>
+    <div class="wiadomosc">${commentObj.commentContent}<p></p></div>
+</div>`
+    addto.insertAdjacentHTML((after) ? 'afterbegin' : 'beforeend',a)
+}
 function setComments(r){
     var comments = r.comments;
     var commentContainer = document.getElementsByClassName("zbiorKomentarzy")[0]
@@ -31,11 +39,7 @@ function setComments(r){
         console.log(i)
         
         console.log(comments[i])
-        var a = `<div class="komentarz">
-    <div class="miejsce ${(i < 3) ? `m${i+1}` : ""}"><p>#${i+1}</p></div>
-    <div class="wiadomosc">${comments[i].commentContent}<p></p></div>
-</div>`
-    commentContainer.insertAdjacentHTML('beforeend',a)
+        addComment(commentContainer,comments[i],i)
     }
     initSendComment()
 }
@@ -172,6 +176,7 @@ document.getElementById("komentarzSubmit").addEventListener("click",(e)=>{
         e.target.wait = true
         document.getElementById("komentarzInput").value = ""
         sendNewComment({productCode: window.productCode,comment:text}).then((r)=>{
+            addComment(document.getElementsByClassName("zbiorKomentarzy")[0],{"commentContent":text},-1,true)
             setTimeout(()=>{
                 e.target.wait = false
             },5000)
