@@ -8,7 +8,7 @@ module.exports.getProduct = async function getProduct(productCode) {
         host: 'world.openfoodfacts.org',
         path: `/api/${config['api-version']}/product/${productCode}.json`
       };
-      
+      console.log(productCode)
       var req = http.get(options, function(res) {
         if(res.statusCode != 200)resolve(JSON.stringify({status:0,status_verbose:"server Error",code:productCode}))
         var bodyChunks = [];
