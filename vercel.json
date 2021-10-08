@@ -1,6 +1,6 @@
 {
     "version": 2,
-    "name": "nodejs-mysql",
+    "name": "nodejs",
     "builds": [
       { "src": "index.js", "use": "@vercel/node" }
     ],
