@@ -20,6 +20,7 @@ document.addEventListener("DOMContentLoaded", function () {
             //console.error(error)
         }
     } else {
+        document.getElementsByClassName("zamienniki")[0].innerHTML = `<h3 style = "font-family: 'Source Sans Pro', sans-serif;">Nie wprowadzono kodu</h3>`
         noComents();
     }
     initSendComment();
@@ -205,7 +206,7 @@ function noComents() {
         text.textContent = "Brak Komentarzy"
     }
     else {
-        text.textContent = "Tutaj pojawią się komentarze"
+        text.textContent = "Nie wprowadzono kodu"
     }
     commentContainer.append(text)
 }
@@ -317,5 +318,5 @@ function initSendComment() {
 }
 //#endregion
 function getProduct(e) {
-    updateInfo(document.getElementById("inputText").value, true)
+    if(/^\d+$/.test(document.getElementById("inputText").value))updateInfo(document.getElementById("inputText").value, true)
 }
