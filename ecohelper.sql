@@ -40,7 +40,7 @@ CREATE TABLE `ecohelper` (
 --
 
 INSERT INTO `ecohelper` (`codeProduct`, `co2Cost`, `comments`, `betterAlternative`, `other`) VALUES
-(5901088009730, 44, '{\"comments\":[]}', '{\"alternatives\":[]', NULL);
+(5901088009730, 44, '{\"comments\":[]}', '{\"alternatives\":[]\}\', NULL);
 
 --
 -- Indexes for dumped tables
