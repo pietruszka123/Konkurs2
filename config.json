@@ -1,5 +1,11 @@
 {
-    "komentarz": "konfiguracja",
+    "port":80,
     "x-Powered-By": "Gaba",
-    "api-version":"v2"
+    "debugLog":false,
+    "api-version":"v2",
+    "DataBase-host":"localhost",
+    "DataBase-port": 3306,
+    "DataBase-user": "root",
+    "DataBase-password":"",
+    "DataBase-database":"ecohelper"
 }
