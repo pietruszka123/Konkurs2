@@ -5,27 +5,25 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/css.css">
-    <meta name="productData" content="null">
+    <link rel="stylesheet" href="css.css">
+
     <!--Importowanie czcionki Soure Sans Pro-->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:ital,wght@0,200;0,300;0,400;0,600;0,700;0,900;1,200;1,300;1,400;1,600;1,700;1,900&display=swap"
-        rel="stylesheet">
-    <title>EcoHelper</title>
+    <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:ital,wght@0,200;0,300;0,400;0,600;0,700;0,900;1,200;1,300;1,400;1,600;1,700;1,900&display=swap" rel="stylesheet">
+    <title>Document</title>
 </head>
 
 <body>
-    <script src="/adapter.min.js"></script>
+    <script src="adapter.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@ericblade/quagga2/dist/quagga.js"></script>
-    <script src="/index.js" type="module"></script>
+    <script src="index.js" type="module"></script>
 
 
-    <section class="lewa">
-        <div class="kamerka" id="yourElement"></div>
+    <section class="lewa" id="kamerka">
+        <h1>EcoHelper</h1>
+        <input id="przycisk" type="button" value="Uzyj wpisanego kodu">
         <input class="bialy" id="inputText" type="text" placeholder="Wpisz kod produktu">
-        <input id="przycisk" type="button">
     </section>
     <div class="przedzial"></div>
     <section class="prawa">
@@ -36,8 +34,7 @@
                 <h3>Opakowanie:</h3>
                 <p> Butelka plastikowa</p>
                 <h3>Info:</h3>
-                <p> Pewnie się zastanawiacie co mogłoby się stać jak wstawimy więcej informacji... no ja też więc piszę
-                    jakiś dłuższy tekst bo nie będę się szmacił lorem ipsum.</p>
+                <p> Pewnie się zastanawiacie co mogłoby się stać jak wstawimy więcej informacji... no ja też więc piszę jakiś dłuższy tekst bo nie będę się szmacił lorem ipsum.</p>
                 <h3>Dalsze:</h3>
                 <p> </p>
             </div>
@@ -45,44 +42,80 @@
         <div class="zdjecie">
             <div class="testowanieZdj"></div>
         </div>
-        <div class="komentarze">
-            <div class="zbiorKomentarzy">
-                <div class="wpisywanieKomentarzy">
-                        <input type="text" id="komentarzInput" placeholder="Wpisz komentarz">
-                        <input id="komentarzSubmit" type="button">
+        <div class="caloscSekcjiKomentarzy">
+            <div class="komentarze">
+                <div class="zbiorKomentarzy">
+                    <div class="komentarz">
+                        <div class="miejsce m1">
+                            <p>#1</p>
+                        </div>
+                        <div class="wiadomosc">
+                            <p>Trzeba wywalić do kosza. Nie umiesz zrobić czegoś tak banalnego? Czemu? Gdzie ja żyje? Jaki to świat? Przez kogo jestem zdominowany?...</p>
+                        </div>
+                    </div>
+                    <div class="komentarz">
+                        <div class="miejsce m2">
+                            <p>#2</p>
+                        </div>
+                        <div class="wiadomosc">
+                            <p>Trzeba wywalić do kibla</p>
+                        </div>
+                    </div>
+                    <div class="komentarz">
+                        <div class="miejsce m3">
+                            <p>#3</p>
+                        </div>
+                        <div class="wiadomosc">
+                            <p>Trzeba wywalić do sąsiada</p>
+                        </div>
+                    </div>
+                    <div class="komentarz">
+                        <div class="miejsce m4">
+                            <p>#4</p>
+                        </div>
+                        <div class="wiadomosc">
+                            <p>Trzeba wywalić na trawę</p>
+                        </div>
+                    </div>
+                    <div class="komentarz">
+                        <div class="miejsce m4">
+                            <p>#5</p>
+                        </div>
+                        <div class="wiadomosc">
+                            <p>Trzeba wywalić...</p>
+                        </div>
+                    </div>
+                    <div class="komentarz">
+                        <div class="miejsce m4">
+                            <p>#6</p>
+                        </div>
+                        <div class="wiadomosc">
+                            <p>Trzeba wywalić...</p>
+                        </div>
+                    </div>
+                    <div class="komentarz">
+                        <div class="miejsce m4">
+                            <p>#7</p>
+                        </div>
+                        <div class="wiadomosc">
+                            <p>Trzeba wywalić...</p>
+                        </div>
+                    </div>
+                    <div class="komentarz">
+                        <div class="miejsce m4">
+                            <p>#8</p>
+                        </div>
+                        <div class="wiadomosc">
+                            <p>Trzeba wywalić...</p>
+                        </div>
+                    </div>
                 </div>
-                <div class="komentarz">
-                    <div class="miejsce m1"><p>#1</p></div>
-                    <div class="wiadomosc">Trzeba wywalić do kosza. Nie umiesz zrobić czegoś tak banalnego? Czemu? Gdzie ja żyje? Jaki to świat? Przez kogo jestem zdominowany?...</p></div>
-                </div>
-                <div class="komentarz">
-                    <div class="miejsce m2"><p>#2</p></div>
-                    <div class="wiadomosc">Trzeba wywalić do kibla</p></div>
-                </div>
-                <div class="komentarz">
-                    <div class="miejsce m3"><p>#3</p></div>
-                    <div class="wiadomosc"><p>Trzeba wywalić do sąsiada</p></div>
-                </div>
-                <div class="komentarz">
-                    <div class="miejsce m4"><p>#4</p></div>
-                    <div class="wiadomosc">Trzeba wywalić na trawę</p></div>
-                </div>
-                <div class="komentarz">
-                    <div class="miejsce m4"><p>#5</p></div>
-                    <div class="wiadomosc">Trzeba wywalić...</p></div>
-                </div>
-                <div class="komentarz">
-                    <div class="miejsce m4"><p>#6</p></div>
-                    <div class="wiadomosc">Trzeba wywalić...</p></div>
-                </div>
-                <div class="komentarz">
-                    <div class="miejsce m4"><p>#7</p></div>
-                    <div class="wiadomosc">Trzeba wywalić...</p></div>
-                </div>
-                <div class="komentarz">
-                    <div class="miejsce m4"><p>#8</p></div>
-                    <div class="wiadomosc">Trzeba wywalić...</p></div>
-                </div>
+            </div>
+            <div class="wpisywanieKomentarzy">
+                <form>
+                    <input type="text" id="komentarzInput" placeholder="Dodaj nowy sposób na zrecyklowanie">
+                    <input id="komentarzSubmit" type="button" value="Dodaj">
+                </form>
             </div>
         </div>
     </section>

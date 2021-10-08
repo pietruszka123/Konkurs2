@@ -1,18 +1,18 @@
-document.addEventListener("DOMContentLoaded", function(){
+document.addEventListener("DOMContentLoaded", function() {
     window.commentsLength = 0
     window.commentsMax = 0
     var product = document.head.querySelector("[name~=productData][content]").content;
     var productID = document.head.querySelector("[name~=productID][content]");
     //console.log(product)
-    if(productID){
+    if (productID) {
         window.productCode = productID.content
     }
-    if(product != "null"){
+    if (product != "null") {
         try {
             var comments = JSON.parse(product)
-            //console.log(comments)
-            //console.log(comments[0])
-            updateInfo(comments[0].codeProduct,false)
+                //console.log(comments)
+                //console.log(comments[0])
+            updateInfo(comments[0].codeProduct, false)
             setComments(JSON.parse(comments[0].comments));
         } catch (error) {
             //console.error(error)
@@ -171,10 +171,8 @@ Quagga.init({
     inputStream: {
         name: "Live",
         type: "LiveStream",
-        target: document.querySelector('#yourElement'), // Or '#yourElement' (optional)
+        target: document.querySelector('#kamerka'), // Or '#yourElement' (optional)
         constraints: {
-            width: 400,
-            height: 400,
             facingMode: "environment",
         },
     },

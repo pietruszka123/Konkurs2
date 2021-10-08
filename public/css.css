@@ -1,35 +1,40 @@
 /* Color Theme Swatches in Hex */
-*{
+
+* {
     margin: 0;
     padding: 0;
 }
 
-html{
---zielony1: #29D955;
---zielony2: #67BF5A;
---zielony3: #5EA653;
---bialy: #F2F2F2;
---bialawy: #cfcfcf;
---szarawy: #A2A2A2;
---szary: #595959; 
-background-color: var(--bialy);
-height: 100%;
-}
-
-
-
-body{
-    display: flex;
+html {
+    --zielony1: #29D955;
+    --zielony2: #67BF5A;
+    --zielony3: #5EA653;
+    --bialy: #F2F2F2;
+    --bialawy: #cfcfcf;
+    --szarawy: #A2A2A2;
+    --szary: #595959;
+    background-color: var(--bialy);
     height: 100%;
 }
-.lewa{
+
+body {
+    display: flex;
+    height: 100%;
+    scale: (calc(100vw/1920px), calc(100vh/1080px));
+    -moz-transform: scale((calc(100vw/1920px), calc(100vh/1080px)));
+}
+
+.lewa {
     width: 49.75%;
     display: flex;
-    flex-direction: column;
+    flex-direction: column-reverse;
     justify-content: center;
     align-items: center;
+    scale: (calc(100vw/1920px), calc(100vh/1080px));
+    -moz-transform: scale((calc(100vw/1920px), calc(100vh/1080px)));
 }
-.przedzial{
+
+.przedzial {
     margin-left: 0.25%;
     margin-right: 0.25%;
     width: 1px;
@@ -37,174 +42,450 @@ body{
     margin-top: 20px;
     margin-bottom: 20px;
 }
-.prawa{
+
+.prawa {
+    padding: 1%;
     width: 49.75%;
     display: flex;
     flex-direction: row;
     justify-content: center;
     align-items: center;
     flex-wrap: wrap;
+    scale: (calc(100vw/1920px), calc(100vh/1080px));
+    -moz-transform: scale((calc(100vw/1920px), calc(100vh/1080px)));
 }
-#inputText{
+
+#inputText {
     background-color: var(--bialy);
-    border-style:none;
+    border-style: none;
     border-radius: 3px;
     filter: drop-shadow(0px 0px 2px #000000);
-    width: 180px;
-    height: 30px;
-    margin-top: 15px;
-    margin-bottom: 45px;
+    width: 20vw;
+    height: 4vw;
+    margin-top: 1vw;
+    margin-bottom: 2vw;
     padding-left: 10px;
+    font-size: 1.3vw;
+    scale: (calc(100vw/1920px), calc(100vh/1080px));
+    -moz-transform: scale((calc(100vw/1920px), calc(100vh/1080px)));
 }
-#inputText:focus{
+
+#inputText:focus {
     background-color: var(--bialy);
-    border-style:none;
+    border-style: none;
     border-radius: 3px;
     outline: none;
     filter: drop-shadow(0px 0px 2px #000000);
-    width: 180px;
-    height: 30px;
-    margin-top: 15px;
-    margin-bottom: 45px;
+    width: 20vw;
+    height: 4vw;
+    margin-top: 1vw;
+    margin-bottom: 2vw;
     padding-left: 10px;
-}
-#przycisk{
-    background-color: var(--zielony3);
-    border-style:none;
-    border-radius: 3px;
-    filter: drop-shadow(0px 0px 2px #000000);
-    width: 300px;
-    height: 50px;
+    scale: (calc(100vw/1920px), calc(100vh/1080px));
+    -moz-transform: scale((calc(100vw/1920px), calc(100vh/1080px)));
+    font-size: 1.3vw;
 }
 
-.kamerka {
-    width: 400px; 
-    height: 400px; 
-    background-color: black;
-    margin-top: -80px;
+#przycisk {
+    background-color: var(--zielony3);
+    border-style: none;
+    border-radius: 3px;
+    filter: drop-shadow(0px 0px 2px #000000);
+    width: 34vw;
+    height: 5vw;
+    font-family: 'Source Sans Pro', sans-serif;
+    font-size: 3vw;
+    scale: (calc(100vw/1920px), calc(100vh/1080px));
+    -moz-transform: scale((calc(100vw/1920px), calc(100vh/1080px)));
+}
+
+#przycisk:hover {
+    background-color: #6bba5f;
+}
+
+#przycisk:active {
+    background-color: #508c47;
 }
 
 .zdjecie {
-    max-height: 300px;
-    max-width: 300px;
-    width: 300px; 
-    height: 300px; 
+    width: 22vw;
+    height: 22vw;
     box-shadow: 0px 0px 7px 1px #00000099;
     overflow: hidden;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    margin-top: -100px;
+    scale: (calc(100vw/1920px), calc(100vh/1080px));
+    -moz-transform: scale((calc(100vw/1920px), calc(100vh/1080px)));
 }
 
 .informacje {
     background-color: var(--bialy);
     box-shadow: 0px 0px 7px 1px #00000099;
-    width: 350px; 
-    height: 400px;
+    width: 22vw;
+    height: 22vw;
     margin-right: 30px;
+    scale: (calc(100vw/1920px), calc(100vh/1080px));
+    -moz-transform: scale((calc(100vw/1920px), calc(100vh/1080px)));
+}
+
+.tekstInf {
+    margin: 1.6vw;
+    font-family: 'Source Sans Pro', sans-serif;
+    font-size: 1.2vw;
+    scale: (calc(100vw/1920px), calc(100vh/1080px));
+    -moz-transform: scale((calc(100vw/1920px), calc(100vh/1080px)));
+}
+
+.tekstInf>p {
+    margin-bottom: 6px;
+    scale: (calc(100vw/1920px), calc(100vh/1080px));
+    -moz-transform: scale((calc(100vw/1920px), calc(100vh/1080px)));
 }
 
 .komentarze {
+    position: relative;
     background-color: var(--bialy);
     box-shadow: 0px 0px 7px 1px #00000099;
-    width: 680px;
-    height: 300px;
+    width: 46vw;
+    height: 17vw;
+    margin-top: -4.8vw;
     overflow-y: scroll;
     overflow-x: unset;
+    scale: (calc(100vw/1920px), calc(100vh/1080px));
+    -moz-transform: scale((calc(100vw/1920px), calc(100vh/1080px)));
 }
 
-.komentarze > .zbiorKomentarzy > .komentarz {
+.komentarze>.zbiorKomentarzy>.komentarz {
     margin-bottom: 6px;
     font-family: 'Source Sans Pro', sans-serif;
     background-color: #ebebeb;
     border-radius: 10px;
     padding: 6px;
     margin-bottom: 16px;
+    scale: (calc(100vw/1920px), calc(100vh/1080px));
+    -moz-transform: scale((calc(100vw/1920px), calc(100vh/1080px)));
 }
 
-.komentarze > .zbiorKomentarzy > .wpisywanieKomentarzy {
-    position: absolute;
-    margin-top: 230px;
-    margin-left: -30px;
-    background-color: #ebebeb;
-    width: 643.5px;
-    height: 40px;
-    display: flex;
-    align-items: center;
-    padding-left: 20px;
-}
-
-.komentarze > .zbiorKomentarzy > .komentarz:nth-child(2) {
+.komentarze>.zbiorKomentarzy>.komentarz:first-child {
     box-shadow: 0px 0px 10px 1px rgba(199, 176, 43, 0.5);
+    scale: (calc(100vw/1920px), calc(100vh/1080px));
+    -moz-transform: scale((calc(100vw/1920px), calc(100vh/1080px)));
 }
 
-.komentarze > .zbiorKomentarzy > .komentarz > p {
+.komentarze>.zbiorKomentarzy>.komentarz>.wiadomosc>p {
     font-family: 'Source Sans Pro', sans-serif;
+    font-size: 1vw;
+    scale: (calc(100vw/1920px), calc(100vh/1080px));
+    -moz-transform: scale((calc(100vw/1920px), calc(100vh/1080px)));
 }
 
-.komentarze > .zbiorKomentarzy > .komentarz > .miejsce > p {
+.komentarze>.zbiorKomentarzy>.komentarz>.miejsce>p {
     font-weight: 800;
     margin: 1.5px;
+    font-size: 1vw;
+    scale: (calc(100vw/1920px), calc(100vh/1080px));
+    -moz-transform: scale((calc(100vw/1920px), calc(100vh/1080px)));
 }
 
-.komentarze > .zbiorKomentarzy > .komentarz > .miejsce {
+.komentarze>.zbiorKomentarzy>.komentarz>.miejsce {
     border-radius: 100px;
     max-width: min-content;
+    scale: (calc(100vw/1920px), calc(100vh/1080px));
+    -moz-transform: scale((calc(100vw/1920px), calc(100vh/1080px)));
 }
 
-.komentarze > .zbiorKomentarzy > .komentarz > .m1 {
+.komentarze>.zbiorKomentarzy>.komentarz>.m1 {
     background-color: gold;
+    scale: (calc(100vw/1920px), calc(100vh/1080px));
+    -moz-transform: scale((calc(100vw/1920px), calc(100vh/1080px)));
 }
 
-.komentarze > .zbiorKomentarzy > .komentarz > .m2 {
+.komentarze>.zbiorKomentarzy>.komentarz>.m2 {
     background-color: rgb(167, 167, 167);
+    scale: (calc(100vw/1920px), calc(100vh/1080px));
+    -moz-transform: scale((calc(100vw/1920px), calc(100vh/1080px)));
 }
 
-.komentarze > .zbiorKomentarzy > .komentarz > .m3 {
+.komentarze>.zbiorKomentarzy>.komentarz>.m3 {
     background-color: rgb(223, 113, 11);
+    scale: (calc(100vw/1920px), calc(100vh/1080px));
+    -moz-transform: scale((calc(100vw/1920px), calc(100vh/1080px)));
 }
 
-.komentarze > .zbiorKomentarzy {
+.komentarze>.zbiorKomentarzy {
     margin: 30px;
+    scale: (calc(100vw/1920px), calc(100vh/1080px));
+    -moz-transform: scale((calc(100vw/1920px), calc(100vh/1080px)));
 }
 
-.tekstInf {
-    margin: 30px;
+.caloscSekcjiKomentarzy {
+    width: 46vw;
+    height: 25vw;
+    scale: (calc(100vw/1920px), calc(100vh/1080px));
+    -moz-transform: scale((calc(100vw/1920px), calc(100vh/1080px)));
+    margin-top: 6vw;
 }
 
-.tekstInf > p {
-    margin-bottom: 6px;
-    font-family: 'Source Sans Pro', sans-serif;
+.caloscSekcjiKomentarzy>.wpisywanieKomentarzy {
+    width: 654px;
+    height: 40px;
+    scale: (calc(100vw/1920px), calc(100vh/1080px));
+    -moz-transform: scale((calc(100vw/1920px), calc(100vh/1080px)));
+    margin-top: 20px;
 }
 
 #komentarzInput {
     background-color: var(--bialy);
-    border-style:none;
+    border-style: none;
     border-radius: 3px;
-    filter: drop-shadow(0px 0px 2px #000000);
-    width: 380px;
-    padding: 6px;
+    box-shadow: 0px 0px 7px 1px #00000099;
+    width: 39vw;
+    padding: 0.5vw;
     font-size: 75%;
+    scale: (calc(100vw/1920px), calc(100vh/1080px));
+    -moz-transform: scale((calc(100vw/1920px), calc(100vh/1080px)));
 }
 
 #komentarzInput:focus {
     background-color: var(--bialy);
-    border-style:none;
+    border-style: none;
     border-radius: 3px;
-    filter: drop-shadow(0px 0px 2px #000000);
-    width: 380px;
-    padding: 6px;
+    box-shadow: 0px 0px 7px 1px #00000099;
+    width: 39vw;
+    padding: 0.5vw;
     outline: none;
     font-size: 75%;
 }
 
 #komentarzSubmit {
     background-color: var(--zielony3);
-    border-style:none;
+    border-style: none;
     border-radius: 3px;
-    filter: drop-shadow(0px 0px 2px #000000);
-    width: 30px;
+    box-shadow: 0px 0px 7px 1px #00000099;
+    width: fit-content;
     height: 26.6px;
+    scale: (calc(100vw/1920px), calc(100vh/1080px));
+    -moz-transform: scale((calc(100vw/1920px), calc(100vh/1080px)));
+    margin-left: 4px;
+    padding-left: 6px;
+    padding-right: 6px;
+    font-family: 'Source Sans Pro', sans-serif;
+}
+
+#komentarzSubmit:hover {
+    background-color: #6bba5f;
+}
+
+#komentarzSubmit:active {
+    background-color: #508c47;
+}
+
+video {
+    height: 20vw;
+    margin-top: 0.5vw;
+    scale: (calc(100vw/1920px), calc(100vh/1080px));
+    -moz-transform: scale((calc(100vw/1920px), calc(100vh/1080px)));
+}
+
+canvas {
+    display: none;
+}
+
+h1 {
+    font-family: 'Source Sans Pro', sans-serif;
+    font-size: 5vw;
+    color: darkgreen;
+    filter: drop-shadow(0px 0px 2px #508c47);
+    margin-top: 2.2vw;
+    scale: (calc(100vw/1920px), calc(100vh/1080px));
+    -moz-transform: scale((calc(100vw/1920px), calc(100vh/1080px)));
+}
+
+@media only screen and (max-width: 800px) {
+    .lewa {
+        width: 100%;
+        height: 49.75%;
+    }
+    .przedzial {
+        width: 100%;
+        height: 1px;
+        margin-top: 0.1%;
+        margin-bottom: 0.1%;
+        margin-left: 20px;
+        margin-right: 20px;
+    }
+    .prawa {
+        width: 100%;
+        height: 49.75%;
+    }
+    body {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        width: 100%;
+    }
+    #inputText {
+        width: 25vw;
+        height: 5vw;
+        margin-top: 1vw;
+        margin-bottom: 2vw;
+        min-height: 35px;
+        padding-left: 10px;
+        font-size: 1.3vw;
+        scale: (calc(100vw/1080px), calc(100vh/1920px));
+        -moz-transform: scale((calc(100vw/1080px), calc(100vh/1920px)));
+    }
+    #inputText:focus {
+        width: 25vw;
+        height: 5vw;
+        margin-top: 1vw;
+        margin-bottom: 2vw;
+        padding-left: 10px;
+        scale: (calc(100vw/1080px), calc(100vh/1920px));
+        -moz-transform: scale((calc(100vw/1080px), calc(100vh/1920px)));
+        font-size: 1.3vw;
+    }
+    #przycisk {
+        background-color: var(--zielony3);
+        border-style: none;
+        border-radius: 3px;
+        filter: drop-shadow(0px 0px 2px #000000);
+        width: 39vw;
+        min-height: 40px;
+        height: 6vw;
+        font-family: 'Source Sans Pro', sans-serif;
+        font-size: 3vw;
+        scale: (calc(100vw/1080px), calc(100vh/1920px));
+        -moz-transform: scale((calc(100vw/1080px), calc(100vh/1920px)));
+    }
+    video {
+        height: 42vw;
+        max-height: 280px;
+        min-height: 240px;
+    }
+    h1 {
+        font-family: 'Source Sans Pro', sans-serif;
+        font-size: 5vw;
+        scale: (calc(100vw/1080px), calc(100vh/1920px));
+        -moz-transform: scale((calc(100vw/1080px), calc(100vh/1920px)));
+    }
+    .zdjecie {
+        width: 38vw;
+        height: 38vw;
+        box-shadow: 0px 0px 7px 1px #00000099;
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        scale: (calc(100vw/1080px), calc(100vh/1920px));
+        -moz-transform: scale((calc(100vw/1080px), calc(100vh/1920px)));
+    }
+    .informacje {
+        background-color: var(--bialy);
+        box-shadow: 0px 0px 7px 1px #00000099;
+        width: 38vw;
+        height: 38vw;
+        margin-right: 30px;
+        scale: (calc(100vw/1080px), calc(100vh/1920px));
+        -moz-transform: scale((calc(100vw/1080px), calc(100vh/1920px)));
+    }
+    .tekstInf {
+        margin: 1.6vw;
+        font-family: 'Source Sans Pro', sans-serif;
+        font-size: 2.2vw;
+        scale: (calc(100vw/1080px), calc(100vh/1920px));
+        -moz-transform: scale((calc(100vw/1080px), calc(100vh/1920px)));
+    }
+    .tekstInf>p {
+        margin-bottom: 6px;
+        scale: (calc(100vw/1080px), calc(100vh/1920px));
+        -moz-transform: scale((calc(100vw/1080px), calc(100vh/1920px)));
+    }
+    .komentarze {
+        position: relative;
+        background-color: var(--bialy);
+        box-shadow: 0px 0px 7px 1px #00000099;
+        width: 70vw;
+        height: fit-content;
+        margin-top: -4.8vw;
+        scale: (calc(100vw/1080px), calc(100vh/1920px));
+        -moz-transform: scale((calc(100vw/1080px), calc(100vh/1920px)));
+    }
+    .komentarze>.zbiorKomentarzy>.komentarz {
+        margin-bottom: 6px;
+        font-family: 'Source Sans Pro', sans-serif;
+        background-color: #ebebeb;
+        border-radius: 10px;
+        padding: 6px;
+        margin-bottom: 16px;
+        scale: (calc(100vw/1080px), calc(100vh/1920px));
+        -moz-transform: scale((calc(100vw/1080px), calc(100vh/1920px)));
+    }
+    .komentarze>.zbiorKomentarzy>.komentarz>.wiadomosc>p {
+        font-family: 'Source Sans Pro', sans-serif;
+        font-size: 2vw;
+        scale: (calc(100vw/1080px), calc(100vh/1920px));
+        -moz-transform: scale((calc(100vw/1080px), calc(100vh/1920px)));
+    }
+    .komentarze>.zbiorKomentarzy>.komentarz>.miejsce>p {
+        font-weight: 800;
+        margin: 1.5px;
+        font-size: 2vw;
+        scale: (calc(100vw/1080px), calc(100vh/1920px));
+        -moz-transform: scale((calc(100vw/1080px), calc(100vh/1920px)));
+    }
+    .caloscSekcjiKomentarzy {
+        width: 70vw;
+        scale: (calc(100vw/1080px), calc(100vh/1920px));
+        -moz-transform: scale((calc(100vw/1080px), calc(100vh/1920px)));
+        margin-top: 6vw;
+    }
+    .caloscSekcjiKomentarzy>.wpisywanieKomentarzy {
+        width: 654px;
+        scale: (calc(100vw/1080px), calc(100vh/1920px));
+        -moz-transform: scale((calc(100vw/1080px), calc(100vh/1920px)));
+        margin-top: 20px;
+    }
+    #komentarzInput {
+        background-color: var(--bialy);
+        border-style: none;
+        border-radius: 3px;
+        box-shadow: 0px 0px 7px 1px #00000099;
+        width: 62vw;
+        height: 4.5vw;
+        padding: 0.5vw;
+        margin-bottom: 4vw;
+        font-size: 75%;
+        scale: (calc(100vw/1080px), calc(100vh/1920px));
+        -moz-transform: scale((calc(100vw/1080px), calc(100vh/1920px)));
+    }
+    #komentarzInput:focus {
+        background-color: var(--bialy);
+        border-style: none;
+        border-radius: 3px;
+        box-shadow: 0px 0px 7px 1px #00000099;
+        width: 62vw;
+        height: 4.5vw;
+        padding: 0.5vw;
+        margin-bottom: 4vw;
+        outline: none;
+        font-size: 75%;
+    }
+    #komentarzSubmit {
+        background-color: var(--zielony3);
+        border-style: none;
+        border-radius: 3px;
+        box-shadow: 0px 0px 7px 1px #00000099;
+        width: fit-content;
+        height: 26.6px;
+        scale: (calc(100vw/1080px), calc(100vh/1920px));
+        -moz-transform: scale((calc(100vw/1080px), calc(100vh/1920px)));
+        margin-left: 4px;
+        padding-left: 6px;
+        padding-right: 6px;
+        font-family: 'Source Sans Pro', sans-serif;
+    }
 }
