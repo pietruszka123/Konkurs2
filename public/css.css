@@ -21,6 +21,7 @@ body {
     display: flex;
     height: 100%;
     scale: (calc(100vw/1920px), calc(100vh/1080px));
+    -moz-transform: scale((calc(100vw/1920px), calc(100vh/1080px)));
 }
 
 .lewa {
@@ -30,6 +31,7 @@ body {
     justify-content: center;
     align-items: center;
     scale: (calc(100vw/1920px), calc(100vh/1080px));
+    -moz-transform: scale((calc(100vw/1920px), calc(100vh/1080px)));
 }
 
 .przedzial {
@@ -50,6 +52,7 @@ body {
     align-items: center;
     flex-wrap: wrap;
     scale: (calc(100vw/1920px), calc(100vh/1080px));
+    -moz-transform: scale((calc(100vw/1920px), calc(100vh/1080px)));
 }
 
 #inputText {
@@ -64,6 +67,7 @@ body {
     padding-left: 10px;
     font-size: 1.3vw;
     scale: (calc(100vw/1920px), calc(100vh/1080px));
+    -moz-transform: scale((calc(100vw/1920px), calc(100vh/1080px)));
 }
 
 #inputText:focus {
@@ -78,6 +82,7 @@ body {
     margin-bottom: 2vw;
     padding-left: 10px;
     scale: (calc(100vw/1920px), calc(100vh/1080px));
+    -moz-transform: scale((calc(100vw/1920px), calc(100vh/1080px)));
     font-size: 1.3vw;
 }
 
@@ -91,6 +96,7 @@ body {
     font-family: 'Source Sans Pro', sans-serif;
     font-size: 3vw;
     scale: (calc(100vw/1920px), calc(100vh/1080px));
+    -moz-transform: scale((calc(100vw/1920px), calc(100vh/1080px)));
 }
 
 #przycisk:hover {
@@ -111,6 +117,7 @@ body {
     justify-content: center;
     align-items: center;
     scale: (calc(100vw/1920px), calc(100vh/1080px));
+    -moz-transform: scale((calc(100vw/1920px), calc(100vh/1080px)));
 }
 
 .informacje {
@@ -120,6 +127,7 @@ body {
     height: 22vw;
     margin-right: 30px;
     scale: (calc(100vw/1920px), calc(100vh/1080px));
+    -moz-transform: scale((calc(100vw/1920px), calc(100vh/1080px)));
 }
 
 .tekstInf {
@@ -127,11 +135,13 @@ body {
     font-family: 'Source Sans Pro', sans-serif;
     font-size: 1.2vw;
     scale: (calc(100vw/1920px), calc(100vh/1080px));
+    -moz-transform: scale((calc(100vw/1920px), calc(100vh/1080px)));
 }
 
 .tekstInf>p {
     margin-bottom: 6px;
     scale: (calc(100vw/1920px), calc(100vh/1080px));
+    -moz-transform: scale((calc(100vw/1920px), calc(100vh/1080px)));
 }
 
 .komentarze {
@@ -144,6 +154,7 @@ body {
     overflow-y: scroll;
     overflow-x: unset;
     scale: (calc(100vw/1920px), calc(100vh/1080px));
+    -moz-transform: scale((calc(100vw/1920px), calc(100vh/1080px)));
 }
 
 .komentarze>.zbiorKomentarzy>.komentarz {
@@ -154,17 +165,20 @@ body {
     padding: 6px;
     margin-bottom: 16px;
     scale: (calc(100vw/1920px), calc(100vh/1080px));
+    -moz-transform: scale((calc(100vw/1920px), calc(100vh/1080px)));
 }
 
 .komentarze>.zbiorKomentarzy>.komentarz:first-child {
     box-shadow: 0px 0px 10px 1px rgba(199, 176, 43, 0.5);
     scale: (calc(100vw/1920px), calc(100vh/1080px));
+    -moz-transform: scale((calc(100vw/1920px), calc(100vh/1080px)));
 }
 
 .komentarze>.zbiorKomentarzy>.komentarz>.wiadomosc>p {
     font-family: 'Source Sans Pro', sans-serif;
     font-size: 1vw;
     scale: (calc(100vw/1920px), calc(100vh/1080px));
+    -moz-transform: scale((calc(100vw/1920px), calc(100vh/1080px)));
 }
 
 .komentarze>.zbiorKomentarzy>.komentarz>.miejsce>p {
@@ -172,38 +186,45 @@ body {
     margin: 1.5px;
     font-size: 1vw;
     scale: (calc(100vw/1920px), calc(100vh/1080px));
+    -moz-transform: scale((calc(100vw/1920px), calc(100vh/1080px)));
 }
 
 .komentarze>.zbiorKomentarzy>.komentarz>.miejsce {
     border-radius: 100px;
     max-width: min-content;
     scale: (calc(100vw/1920px), calc(100vh/1080px));
+    -moz-transform: scale((calc(100vw/1920px), calc(100vh/1080px)));
 }
 
 .komentarze>.zbiorKomentarzy>.komentarz>.m1 {
     background-color: gold;
     scale: (calc(100vw/1920px), calc(100vh/1080px));
+    -moz-transform: scale((calc(100vw/1920px), calc(100vh/1080px)));
 }
 
 .komentarze>.zbiorKomentarzy>.komentarz>.m2 {
     background-color: rgb(167, 167, 167);
     scale: (calc(100vw/1920px), calc(100vh/1080px));
+    -moz-transform: scale((calc(100vw/1920px), calc(100vh/1080px)));
 }
 
 .komentarze>.zbiorKomentarzy>.komentarz>.m3 {
     background-color: rgb(223, 113, 11);
     scale: (calc(100vw/1920px), calc(100vh/1080px));
+    -moz-transform: scale((calc(100vw/1920px), calc(100vh/1080px)));
 }
 
 .komentarze>.zbiorKomentarzy {
     margin: 30px;
     scale: (calc(100vw/1920px), calc(100vh/1080px));
+    -moz-transform: scale((calc(100vw/1920px), calc(100vh/1080px)));
 }
 
 .caloscSekcjiKomentarzy {
     width: 46vw;
     height: 25vw;
     scale: (calc(100vw/1920px), calc(100vh/1080px));
+    -moz-transform: scale((calc(100vw/1920px), calc(100vh/1080px)));
     margin-top: 6vw;
 }
 
@@ -211,6 +232,7 @@ body {
     width: 654px;
     height: 40px;
     scale: (calc(100vw/1920px), calc(100vh/1080px));
+    -moz-transform: scale((calc(100vw/1920px), calc(100vh/1080px)));
     margin-top: 20px;
 }
 
@@ -223,6 +245,7 @@ body {
     padding: 0.5vw;
     font-size: 75%;
     scale: (calc(100vw/1920px), calc(100vh/1080px));
+    -moz-transform: scale((calc(100vw/1920px), calc(100vh/1080px)));
 }
 
 #komentarzInput:focus {
@@ -244,6 +267,7 @@ body {
     width: fit-content;
     height: 26.6px;
     scale: (calc(100vw/1920px), calc(100vh/1080px));
+    -moz-transform: scale((calc(100vw/1920px), calc(100vh/1080px)));
     margin-left: 4px;
     padding-left: 6px;
     padding-right: 6px;
@@ -262,11 +286,11 @@ video {
     height: 20vw;
     margin-top: 0.5vw;
     scale: (calc(100vw/1920px), calc(100vh/1080px));
+    -moz-transform: scale((calc(100vw/1920px), calc(100vh/1080px)));
 }
 
 canvas {
     display: none;
-    scale: (calc(100vw/1920px), calc(100vh/1080px));
 }
 
 h1 {
@@ -276,4 +300,192 @@ h1 {
     filter: drop-shadow(0px 0px 2px #508c47);
     margin-top: 2.2vw;
     scale: (calc(100vw/1920px), calc(100vh/1080px));
+    -moz-transform: scale((calc(100vw/1920px), calc(100vh/1080px)));
+}
+
+@media only screen and (max-width: 800px) {
+    .lewa {
+        width: 100%;
+        height: 49.75%;
+    }
+    .przedzial {
+        width: 100%;
+        height: 1px;
+        margin-top: 0.1%;
+        margin-bottom: 0.1%;
+        margin-left: 20px;
+        margin-right: 20px;
+    }
+    .prawa {
+        width: 100%;
+        height: 49.75%;
+    }
+    body {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        width: 100%;
+    }
+    #inputText {
+        width: 25vw;
+        height: 5vw;
+        margin-top: 1vw;
+        margin-bottom: 2vw;
+        min-height: 35px;
+        padding-left: 10px;
+        font-size: 1.3vw;
+        scale: (calc(100vw/1080px), calc(100vh/1920px));
+        -moz-transform: scale((calc(100vw/1080px), calc(100vh/1920px)));
+    }
+    #inputText:focus {
+        width: 25vw;
+        height: 5vw;
+        margin-top: 1vw;
+        margin-bottom: 2vw;
+        padding-left: 10px;
+        scale: (calc(100vw/1080px), calc(100vh/1920px));
+        -moz-transform: scale((calc(100vw/1080px), calc(100vh/1920px)));
+        font-size: 1.3vw;
+    }
+    #przycisk {
+        background-color: var(--zielony3);
+        border-style: none;
+        border-radius: 3px;
+        filter: drop-shadow(0px 0px 2px #000000);
+        width: 39vw;
+        min-height: 40px;
+        height: 6vw;
+        font-family: 'Source Sans Pro', sans-serif;
+        font-size: 3vw;
+        scale: (calc(100vw/1080px), calc(100vh/1920px));
+        -moz-transform: scale((calc(100vw/1080px), calc(100vh/1920px)));
+    }
+    video {
+        height: 42vw;
+        max-height: 280px;
+        min-height: 240px;
+    }
+    h1 {
+        font-family: 'Source Sans Pro', sans-serif;
+        font-size: 5vw;
+        scale: (calc(100vw/1080px), calc(100vh/1920px));
+        -moz-transform: scale((calc(100vw/1080px), calc(100vh/1920px)));
+    }
+    .zdjecie {
+        width: 38vw;
+        height: 38vw;
+        box-shadow: 0px 0px 7px 1px #00000099;
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        scale: (calc(100vw/1080px), calc(100vh/1920px));
+        -moz-transform: scale((calc(100vw/1080px), calc(100vh/1920px)));
+    }
+    .informacje {
+        background-color: var(--bialy);
+        box-shadow: 0px 0px 7px 1px #00000099;
+        width: 38vw;
+        height: 38vw;
+        margin-right: 30px;
+        scale: (calc(100vw/1080px), calc(100vh/1920px));
+        -moz-transform: scale((calc(100vw/1080px), calc(100vh/1920px)));
+    }
+    .tekstInf {
+        margin: 1.6vw;
+        font-family: 'Source Sans Pro', sans-serif;
+        font-size: 2.2vw;
+        scale: (calc(100vw/1080px), calc(100vh/1920px));
+        -moz-transform: scale((calc(100vw/1080px), calc(100vh/1920px)));
+    }
+    .tekstInf>p {
+        margin-bottom: 6px;
+        scale: (calc(100vw/1080px), calc(100vh/1920px));
+        -moz-transform: scale((calc(100vw/1080px), calc(100vh/1920px)));
+    }
+    .komentarze {
+        position: relative;
+        background-color: var(--bialy);
+        box-shadow: 0px 0px 7px 1px #00000099;
+        width: 70vw;
+        height: fit-content;
+        margin-top: -4.8vw;
+        scale: (calc(100vw/1080px), calc(100vh/1920px));
+        -moz-transform: scale((calc(100vw/1080px), calc(100vh/1920px)));
+    }
+    .komentarze>.zbiorKomentarzy>.komentarz {
+        margin-bottom: 6px;
+        font-family: 'Source Sans Pro', sans-serif;
+        background-color: #ebebeb;
+        border-radius: 10px;
+        padding: 6px;
+        margin-bottom: 16px;
+        scale: (calc(100vw/1080px), calc(100vh/1920px));
+        -moz-transform: scale((calc(100vw/1080px), calc(100vh/1920px)));
+    }
+    .komentarze>.zbiorKomentarzy>.komentarz>.wiadomosc>p {
+        font-family: 'Source Sans Pro', sans-serif;
+        font-size: 2vw;
+        scale: (calc(100vw/1080px), calc(100vh/1920px));
+        -moz-transform: scale((calc(100vw/1080px), calc(100vh/1920px)));
+    }
+    .komentarze>.zbiorKomentarzy>.komentarz>.miejsce>p {
+        font-weight: 800;
+        margin: 1.5px;
+        font-size: 2vw;
+        scale: (calc(100vw/1080px), calc(100vh/1920px));
+        -moz-transform: scale((calc(100vw/1080px), calc(100vh/1920px)));
+    }
+    .caloscSekcjiKomentarzy {
+        width: 70vw;
+        scale: (calc(100vw/1080px), calc(100vh/1920px));
+        -moz-transform: scale((calc(100vw/1080px), calc(100vh/1920px)));
+        margin-top: 6vw;
+    }
+    .caloscSekcjiKomentarzy>.wpisywanieKomentarzy {
+        width: 654px;
+        scale: (calc(100vw/1080px), calc(100vh/1920px));
+        -moz-transform: scale((calc(100vw/1080px), calc(100vh/1920px)));
+        margin-top: 20px;
+    }
+    #komentarzInput {
+        background-color: var(--bialy);
+        border-style: none;
+        border-radius: 3px;
+        box-shadow: 0px 0px 7px 1px #00000099;
+        width: 62vw;
+        height: 4.5vw;
+        padding: 0.5vw;
+        margin-bottom: 4vw;
+        font-size: 75%;
+        scale: (calc(100vw/1080px), calc(100vh/1920px));
+        -moz-transform: scale((calc(100vw/1080px), calc(100vh/1920px)));
+    }
+    #komentarzInput:focus {
+        background-color: var(--bialy);
+        border-style: none;
+        border-radius: 3px;
+        box-shadow: 0px 0px 7px 1px #00000099;
+        width: 62vw;
+        height: 4.5vw;
+        padding: 0.5vw;
+        margin-bottom: 4vw;
+        outline: none;
+        font-size: 75%;
+    }
+    #komentarzSubmit {
+        background-color: var(--zielony3);
+        border-style: none;
+        border-radius: 3px;
+        box-shadow: 0px 0px 7px 1px #00000099;
+        width: fit-content;
+        height: 26.6px;
+        scale: (calc(100vw/1080px), calc(100vh/1920px));
+        -moz-transform: scale((calc(100vw/1080px), calc(100vh/1920px)));
+        margin-left: 4px;
+        padding-left: 6px;
+        padding-right: 6px;
+        font-family: 'Source Sans Pro', sans-serif;
+    }
 }

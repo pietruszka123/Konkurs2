@@ -158,8 +158,6 @@ Quagga.init({
         type: "LiveStream",
         target: document.querySelector('#kamerka'), // Or '#yourElement' (optional)
         constraints: {
-            width: 400,
-            height: 400,
             facingMode: "environment",
         },
     },
