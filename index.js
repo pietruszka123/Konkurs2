@@ -3,6 +3,9 @@ process.env['NODE_TLS_REJECT_UNAUTHORIZED'] = 0;
 const express = require("express");
 const https = require("https")
 const config = require("./config.json")
+var router = express.Router()
+var path = require("path");
+
 
 var fs = require('fs');
 if (config.debugLog) {
@@ -32,8 +35,7 @@ if (config.debugLog) {
 }
 const mysql = require('mysql');
 
-const openfoodfacts = require("./openFoodFacts")
-
+const openfoodfacts = require("./openFoodFacts");
 
 var head =
 {
@@ -56,8 +58,36 @@ var server = https.createServer({
     console.log("Dziala")
 
 });*/
-app.use("/", express.static('public'));
+function isMobile(req, res, next) {
+    if (
+        /Android|webOS|iPhone|iPad|iPod|BlackBerry|BB|PlayBook|IEMobile|Windows Phone|Kindle|Silk|Opera Mini/i.test(
+            req.headers["user-agent"]
+        )
+    ) {
+        // Instead of redirecting to another view you can also render a separate
+        // view for mobile view e.g. res.render('mobileview');
 
+        res.redirect("/mobile/");
+    }else{
+        next();
+    }
+}
+app.use("/",function (req, res, next) {
+    if(req.originalUrl == "/")isMobile(req,res,next)
+    else{
+        next()
+    }
+    
+});
+app.get("/mobile",function(req,res,next){
+    res.sendFile('public/mobile/index.html', { root: __dirname })
+})
+app.use("/", express.static('public'));
+router.get("/", (req, res, next) => {
+    console.log("a")
+    console.log(res)
+    next()
+})
 
 app.post("/getProduct.json", (req, res, next) => {
     if (req.body && req.body.productCode) {
@@ -75,7 +105,28 @@ app.post("/getProduct.json", (req, res, next) => {
 })
 
 
-
+function GetProductPage(req, res, con) {
+    return new Promise((resolve, rejects) => {
+        var sql = "SELECT * FROM ecohelper WHERE codeProduct = " + req.params.productID;
+        if (req.params.productID.match(/^[0-9]+$/) != null) {
+            con.query(sql, (err, result, f) => {
+                if (err) {
+                    res.send("DataBaseError")
+                    return
+                }
+                console.log(req.params)
+                res.statusCode = 200
+                var file = fs.readFileSync("./public/index.html")
+                var files = file.toString('utf8');
+                if (result && result.length) files = files.replace(`<meta name="productData" content="null">`, `<meta name="productData" content='${JSON.stringify(result)}'><meta name="productID" content=${req.params.productID}>`)
+                //res.sendFile('public/index.html', {root: __dirname })
+                res.send(files)
+            })
+        } else {
+            res.sendFile('public/index.html', { root: __dirname })
+        }
+    })
+}
 
 var con = mysql.createConnection({
     host: config["DataBase-host"],
@@ -101,16 +152,20 @@ con.connect(function (erroro) {
                     if (erroro) {
                         console.log(erroro)
                         res.writeHead(412, head)
-                        res.end(JSON.stringify({status:0, error: "server error" }))
+                        res.end(JSON.stringify({ status: 0, error: "server error" }))
                         return
                     };
                     if (!result[0]) {
                         res.writeHead(404, head)
-                        res.end(JSON.stringify({status:0,  error: "Product not found"}))
-                        //sql = ""
-                        //con.query()
-                        return 
-                    }else{
+                        res.end(JSON.stringify({ status: 0, error: "Product not found" }))
+                        sql = `INSERT INTO ecohelper (codeProduct, co2Cost, comments, betterAlternative, other) VALUES
+                        ("${kodKreskowy}", 0, '{\"comments\":[]}','\{"alternatives\":[]\}', NULL);`
+                        con.query(sql, (err, resu, f) => {
+                            console.log(err)
+                            console.log(resu)
+                        })
+                        return
+                    } else {
                         //console.log(result[0].codeProduct);
                         res.writeHead(200, head)
                         result[0].status = 1
@@ -174,24 +229,10 @@ con.connect(function (erroro) {
         }
     })
     app.get("/product/:productID", (req, res, next) => {
-        var sql = "SELECT * FROM ecohelper WHERE codeProduct = " + req.params.productID;
-        if (req.params.productID.match(/^[0-9]+$/) != null) {
-            con.query(sql, (err, result, f) => {
-                if (err) {
-                    res.send("DataBaseError")
-                    return
-                }
-                console.log(req.params)
-                res.statusCode = 200
-                var file = fs.readFileSync("./public/index.html")
-                var files = file.toString('utf8');
-                if (result && result.length) files = files.replace(`<meta name="productData" content="null">`, `<meta name="productData" content='${JSON.stringify(result)}'><meta name="productID" content=${req.params.productID}>`)
-                //res.sendFile('public/index.html', {root: __dirname })
-                res.send(files)
-            })
-        } else {
-            res.sendFile('public/index.html', { root: __dirname })
-        }
+        GetProductPage(req, res, con)
+    })
+    app.get("/mobile/product/:productID", (req, res, next) => {
+        GetProductPage(req, res, con)
     })
 })
 //#endregion

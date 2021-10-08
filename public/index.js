@@ -17,6 +17,8 @@ document.addEventListener("DOMContentLoaded", function(){
         } catch (error) {
             //console.error(error)
         }
+    }else{
+        noComents();
     }
 });
 /**
@@ -26,18 +28,19 @@ document.addEventListener("DOMContentLoaded", function(){
  * @param {number} i 
  * @param {boolean} after 
  */
-function addComment(addto,commentObj,i,after =false){
+function addComment(addto,commentObj,i,focus = false){
+    if(window.commentsLength == 0){
+        commentContainer.innerHTML = "";
+        commentContainer.append(addCommentObj)
+        after = false
+    }
     var a = `<div class="komentarz">
     <div class="miejsce ${(i < 3) ? `m${i+1}` : ""}"><p>#${i+1}</p></div>
     <div class="wiadomosc">${commentObj.commentContent}<p></p></div>
 </div>`
-    addto.insertAdjacentHTML((after) ? 'afterbegin' : 'beforeend',a)
-    if(after){
-        //console.dir(addto)
-        var temp = addto.childNodes[0]
-        //console.log(temp)
-        addto.childNodes[0].parentNode.insertBefore(addto.childNodes[1],addto.childNodes[0])
-    }
+    addto.insertAdjacentHTML('beforeend',a)
+    if(focus)addto.lastChild.scrollIntoView()
+
 }
 /**
  * 
@@ -45,6 +48,7 @@ function addComment(addto,commentObj,i,after =false){
  */
 function setComments(r){
     var comments = r.comments;
+    window.commentsLength = comments.length
     var commentContainer = document.getElementsByClassName("zbiorKomentarzy")[0]
     if(addCommentObj == undefined)addCommentObj = commentContainer.childNodes[1];
     comments.sort((a, b) => {
@@ -126,6 +130,14 @@ function sendNewComment(tosend){
         xhr.send(JSON.stringify(tosend));
     })
 }
+function noComents(){
+    var commentContainer = document.getElementsByClassName("zbiorKomentarzy")[0]
+    if(addCommentObj == undefined)addCommentObj = commentContainer.childNodes[1];
+    commentContainer.innerHTML = ""
+    commentContainer.append(addCommentObj)
+    commentContainer.append("Brak Komentarzy")
+    initSendComment()
+}
 //#endregion
 var addCommentObj;
 function updateInfo(tosend,comm) {
@@ -148,7 +160,10 @@ function updateInfo(tosend,comm) {
     if(comm){
     sendGetFromDataBase(tosend).then((r) => {
         console.log(r)
-        setComments(JSON.parse(r.comments))
+        if(r.comments)setComments(JSON.parse(r.comments))
+        else{
+            noComents()
+        }
     })
     }
 }
@@ -214,7 +229,9 @@ document.getElementById("komentarzSubmit").addEventListener("click",(e)=>{
         e.target.wait = true
         document.getElementById("komentarzInput").value = ""
         sendNewComment({productCode: window.productCode,comment:text}).then((r)=>{
-            addComment(document.getElementsByClassName("zbiorKomentarzy")[0],{"commentContent":text},-1,true)
+            window.commentsLength++;
+            window.commentsMax++;
+            addComment(document.getElementsByClassName("zbiorKomentarzy")[0],{"commentContent":text},window.commentsMax,true)
             setTimeout(()=>{
                 e.target.wait = false
             },5000)
