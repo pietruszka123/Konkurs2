@@ -21,7 +21,6 @@ body {
     display: flex;
     height: 100%;
     scale: (calc(100vw/1920px), calc(100vh/1080px));
-    -moz-transform: scale((calc(100vw/1920px), calc(100vh/1080px)));
 }
 
 .lewa {
@@ -31,7 +30,6 @@ body {
     justify-content: center;
     align-items: center;
     scale: (calc(100vw/1920px), calc(100vh/1080px));
-    -moz-transform: scale((calc(100vw/1920px), calc(100vh/1080px)));
 }
 
 .przedzial {
@@ -52,14 +50,13 @@ body {
     align-items: center;
     flex-wrap: wrap;
     scale: (calc(100vw/1920px), calc(100vh/1080px));
-    -moz-transform: scale((calc(100vw/1920px), calc(100vh/1080px)));
 }
 
 #inputText {
     background-color: var(--bialy);
     border-style: none;
-    border-radius: 3px;
-    filter: drop-shadow(0px 0px 2px #000000);
+    border-radius: 5px;
+    filter: drop-shadow(0px 0px 5px #000000);
     width: 20vw;
     height: 4vw;
     margin-top: 1vw;
@@ -67,44 +64,44 @@ body {
     padding-left: 10px;
     font-size: 1.3vw;
     scale: (calc(100vw/1920px), calc(100vh/1080px));
-    -moz-transform: scale((calc(100vw/1920px), calc(100vh/1080px)));
 }
 
 #inputText:focus {
     background-color: var(--bialy);
     border-style: none;
-    border-radius: 3px;
+    border-radius: 5px;
     outline: none;
-    filter: drop-shadow(0px 0px 2px #000000);
+    filter: drop-shadow(0px 0px 5px #000000);
     width: 20vw;
     height: 4vw;
     margin-top: 1vw;
     margin-bottom: 2vw;
     padding-left: 10px;
     scale: (calc(100vw/1920px), calc(100vh/1080px));
-    -moz-transform: scale((calc(100vw/1920px), calc(100vh/1080px)));
     font-size: 1.3vw;
 }
 
 #przycisk {
     background-color: var(--zielony3);
     border-style: none;
-    border-radius: 3px;
-    filter: drop-shadow(0px 0px 2px #000000);
+    border-radius: 5px;
+    font-weight: 900;
+    filter: drop-shadow(0px 0px 5px #000000);
     width: 34vw;
     height: 5vw;
     font-family: 'Source Sans Pro', sans-serif;
     font-size: 3vw;
     scale: (calc(100vw/1920px), calc(100vh/1080px));
-    -moz-transform: scale((calc(100vw/1920px), calc(100vh/1080px)));
 }
 
 #przycisk:hover {
     background-color: #6bba5f;
+    border-radius: 5px;
 }
 
 #przycisk:active {
     background-color: #508c47;
+    border-radius: 5px;
 }
 
 .zdjecie {
@@ -117,7 +114,7 @@ body {
     justify-content: center;
     align-items: center;
     scale: (calc(100vw/1920px), calc(100vh/1080px));
-    -moz-transform: scale((calc(100vw/1920px), calc(100vh/1080px)));
+    border-radius: 3px;
 }
 
 .informacje {
@@ -127,7 +124,7 @@ body {
     height: 22vw;
     margin-right: 30px;
     scale: (calc(100vw/1920px), calc(100vh/1080px));
-    -moz-transform: scale((calc(100vw/1920px), calc(100vh/1080px)));
+    border-radius: 3px;
 }
 
 .tekstInf {
@@ -135,26 +132,24 @@ body {
     font-family: 'Source Sans Pro', sans-serif;
     font-size: 1.2vw;
     scale: (calc(100vw/1920px), calc(100vh/1080px));
-    -moz-transform: scale((calc(100vw/1920px), calc(100vh/1080px)));
 }
 
 .tekstInf>p {
     margin-bottom: 6px;
     scale: (calc(100vw/1920px), calc(100vh/1080px));
-    -moz-transform: scale((calc(100vw/1920px), calc(100vh/1080px)));
 }
 
 .komentarze {
     position: relative;
     background-color: var(--bialy);
     box-shadow: 0px 0px 7px 1px #00000099;
+    border-radius: 3px;
     width: 46vw;
     height: 17vw;
     margin-top: -4.8vw;
     overflow-y: scroll;
     overflow-x: unset;
     scale: (calc(100vw/1920px), calc(100vh/1080px));
-    -moz-transform: scale((calc(100vw/1920px), calc(100vh/1080px)));
 }
 
 .komentarze>.zbiorKomentarzy>.komentarz {
@@ -165,20 +160,17 @@ body {
     padding: 6px;
     margin-bottom: 16px;
     scale: (calc(100vw/1920px), calc(100vh/1080px));
-    -moz-transform: scale((calc(100vw/1920px), calc(100vh/1080px)));
 }
 
 .komentarze>.zbiorKomentarzy>.komentarz:first-child {
     box-shadow: 0px 0px 10px 1px rgba(199, 176, 43, 0.5);
     scale: (calc(100vw/1920px), calc(100vh/1080px));
-    -moz-transform: scale((calc(100vw/1920px), calc(100vh/1080px)));
 }
 
 .komentarze>.zbiorKomentarzy>.komentarz>.wiadomosc>p {
     font-family: 'Source Sans Pro', sans-serif;
     font-size: 1vw;
     scale: (calc(100vw/1920px), calc(100vh/1080px));
-    -moz-transform: scale((calc(100vw/1920px), calc(100vh/1080px)));
 }
 
 .komentarze>.zbiorKomentarzy>.komentarz>.miejsce>p {
@@ -186,53 +178,41 @@ body {
     margin: 1.5px;
     font-size: 1vw;
     scale: (calc(100vw/1920px), calc(100vh/1080px));
-    -moz-transform: scale((calc(100vw/1920px), calc(100vh/1080px)));
 }
 
 .komentarze>.zbiorKomentarzy>.komentarz>.miejsce {
     border-radius: 100px;
     max-width: min-content;
     scale: (calc(100vw/1920px), calc(100vh/1080px));
-    -moz-transform: scale((calc(100vw/1920px), calc(100vh/1080px)));
 }
 
 .komentarze>.zbiorKomentarzy>.komentarz>.m1 {
     background-color: gold;
-    scale: (calc(100vw/1920px), calc(100vh/1080px));
-    -moz-transform: scale((calc(100vw/1920px), calc(100vh/1080px)));
 }
 
 .komentarze>.zbiorKomentarzy>.komentarz>.m2 {
     background-color: rgb(167, 167, 167);
-    scale: (calc(100vw/1920px), calc(100vh/1080px));
-    -moz-transform: scale((calc(100vw/1920px), calc(100vh/1080px)));
 }
 
 .komentarze>.zbiorKomentarzy>.komentarz>.m3 {
     background-color: rgb(223, 113, 11);
-    scale: (calc(100vw/1920px), calc(100vh/1080px));
-    -moz-transform: scale((calc(100vw/1920px), calc(100vh/1080px)));
 }
 
 .komentarze>.zbiorKomentarzy {
     margin: 30px;
     scale: (calc(100vw/1920px), calc(100vh/1080px));
-    -moz-transform: scale((calc(100vw/1920px), calc(100vh/1080px)));
 }
 
 .caloscSekcjiKomentarzy {
     width: 46vw;
-    height: 25vw;
     scale: (calc(100vw/1920px), calc(100vh/1080px));
-    -moz-transform: scale((calc(100vw/1920px), calc(100vh/1080px)));
     margin-top: 6vw;
 }
 
 .caloscSekcjiKomentarzy>.wpisywanieKomentarzy {
-    width: 654px;
+    width: 100%;
     height: 40px;
     scale: (calc(100vw/1920px), calc(100vh/1080px));
-    -moz-transform: scale((calc(100vw/1920px), calc(100vh/1080px)));
     margin-top: 20px;
 }
 
@@ -241,11 +221,11 @@ body {
     border-style: none;
     border-radius: 3px;
     box-shadow: 0px 0px 7px 1px #00000099;
-    width: 39vw;
+    width: 86.75%;
     padding: 0.5vw;
+    height: 26.6px;
     font-size: 75%;
     scale: (calc(100vw/1920px), calc(100vh/1080px));
-    -moz-transform: scale((calc(100vw/1920px), calc(100vh/1080px)));
 }
 
 #komentarzInput:focus {
@@ -253,7 +233,7 @@ body {
     border-style: none;
     border-radius: 3px;
     box-shadow: 0px 0px 7px 1px #00000099;
-    width: 39vw;
+    width: 42vw;
     padding: 0.5vw;
     outline: none;
     font-size: 75%;
@@ -264,10 +244,9 @@ body {
     border-style: none;
     border-radius: 3px;
     box-shadow: 0px 0px 7px 1px #00000099;
-    width: fit-content;
+    width: 9%;
     height: 26.6px;
     scale: (calc(100vw/1920px), calc(100vh/1080px));
-    -moz-transform: scale((calc(100vw/1920px), calc(100vh/1080px)));
     margin-left: 4px;
     padding-left: 6px;
     padding-right: 6px;
@@ -286,7 +265,7 @@ video {
     height: 20vw;
     margin-top: 0.5vw;
     scale: (calc(100vw/1920px), calc(100vh/1080px));
-    -moz-transform: scale((calc(100vw/1920px), calc(100vh/1080px)));
+    filter: drop-shadow(0px 0px 5px #000000);
 }
 
 canvas {
@@ -300,7 +279,39 @@ h1 {
     filter: drop-shadow(0px 0px 2px #508c47);
     margin-top: 2.2vw;
     scale: (calc(100vw/1920px), calc(100vh/1080px));
-    -moz-transform: scale((calc(100vw/1920px), calc(100vh/1080px)));
+}
+
+.wiadomosc {
+    display: flex;
+}
+
+.ocenianieKomentarzy {
+    float: right;
+}
+
+.updoot {
+    font-size: 1vw;
+    width: 2vw;
+    height: 2vw;
+    transform: rotate(180deg);
+    z-index: 99;
+    text-align: center;
+    border-radius: 200px;
+    border-style: solid;
+    margin-bottom: 0.5vw;
+    color: #ff4500;
+}
+
+.downdoot {
+    font-size: 1vw;
+    z-index: 99;
+    width: 2vw;
+    height: 2vw;
+    z-index: 99;
+    text-align: center;
+    border-radius: 200px;
+    border-style: solid;
+    color: #7193ff;
 }
 
 @media only screen and (max-width: 800px) {
@@ -333,7 +344,8 @@ h1 {
         margin-bottom: 2vw;
         min-height: 35px;
         padding-left: 10px;
-        font-size: 1.3vw;
+        font-size: 2vw;
+        text-align: center;
         scale: (calc(100vw/1080px), calc(100vh/1920px));
         -moz-transform: scale((calc(100vw/1080px), calc(100vh/1920px)));
     }
@@ -345,7 +357,7 @@ h1 {
         padding-left: 10px;
         scale: (calc(100vw/1080px), calc(100vh/1920px));
         -moz-transform: scale((calc(100vw/1080px), calc(100vh/1920px)));
-        font-size: 1.3vw;
+        font-size: 2vw;
     }
     #przycisk {
         background-color: var(--zielony3);
@@ -442,9 +454,10 @@ h1 {
         scale: (calc(100vw/1080px), calc(100vh/1920px));
         -moz-transform: scale((calc(100vw/1080px), calc(100vh/1920px)));
         margin-top: 6vw;
+        height: 10vw;
     }
     .caloscSekcjiKomentarzy>.wpisywanieKomentarzy {
-        width: 654px;
+        width: 70vw;
         scale: (calc(100vw/1080px), calc(100vh/1920px));
         -moz-transform: scale((calc(100vw/1080px), calc(100vh/1920px)));
         margin-top: 20px;
@@ -454,7 +467,7 @@ h1 {
         border-style: none;
         border-radius: 3px;
         box-shadow: 0px 0px 7px 1px #00000099;
-        width: 62vw;
+        width: 60vw;
         height: 4.5vw;
         padding: 0.5vw;
         margin-bottom: 4vw;
@@ -479,8 +492,8 @@ h1 {
         border-style: none;
         border-radius: 3px;
         box-shadow: 0px 0px 7px 1px #00000099;
-        width: fit-content;
-        height: 26.6px;
+        width: 7vw;
+        height: 4.5vw;
         scale: (calc(100vw/1080px), calc(100vh/1920px));
         -moz-transform: scale((calc(100vw/1080px), calc(100vh/1920px)));
         margin-left: 4px;
