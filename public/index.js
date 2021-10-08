@@ -59,7 +59,7 @@ function setComments(r){
     commentContainer.append(addCommentObj)
     for (let i = 0; i < comments.length; i++) {
         //console.log(i)
-        if(comments[i].id && comments[i].id > window.commentsMax){
+        if(comments[i].id && parseInt(comments[i].id) > window.commentsMax){
             window.commentsMax = comments[i].id
         }
         //console.log(comments[i])
@@ -228,10 +228,10 @@ document.getElementById("komentarzSubmit").addEventListener("click",(e)=>{
     if(text.length != 0 && window.productCode && !e.target.wait){
         e.target.wait = true
         document.getElementById("komentarzInput").value = ""
-        sendNewComment({productCode: window.productCode,comment:text}).then((r)=>{
+        sendNewComment({productCode: window.productCode,comment:text,id:window.commentsMax+1}).then((r)=>{
+            addComment(document.getElementsByClassName("zbiorKomentarzy")[0],{"commentContent":text},window.commentsLength,true)
             window.commentsLength++;
             window.commentsMax++;
-            addComment(document.getElementsByClassName("zbiorKomentarzy")[0],{"commentContent":text},window.commentsMax,true)
             setTimeout(()=>{
                 e.target.wait = false
             },5000)
