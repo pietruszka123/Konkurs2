@@ -105,7 +105,7 @@ app.post("/getProduct.json", (req, res, next) => {
 })
 
 
-function GetProductPage(req, res, con) {
+function GetProductPage(req, res, con,mobile = false) {
     return new Promise((resolve, rejects) => {
         var sql = "SELECT * FROM ecohelper WHERE codeProduct = " + req.params.productID;
         if (req.params.productID.match(/^[0-9]+$/) != null) {
@@ -116,14 +116,18 @@ function GetProductPage(req, res, con) {
                 }
                 console.log(req.params)
                 res.statusCode = 200
-                var file = fs.readFileSync("./public/index.html")
+                if(mobile)var file = fs.readFileSync("./public/mobile/index.html")
+                else var file = fs.readFileSync("./public/index.html")
+                
                 var files = file.toString('utf8');
                 if (result && result.length) files = files.replace(`<meta name="productData" content="null">`, `<meta name="productData" content='${JSON.stringify(result)}'><meta name="productID" content=${req.params.productID}>`)
                 //res.sendFile('public/index.html', {root: __dirname })
                 res.send(files)
             })
         } else {
-            res.sendFile('public/index.html', { root: __dirname })
+            if(mobile)res.sendFile('public/mobile,index.html', { root: __dirname })
+            else res.sendFile('public/index.html', { root: __dirname })
+            
         }
     })
 }
@@ -232,7 +236,7 @@ con.connect(function (erroro) {
         GetProductPage(req, res, con)
     })
     app.get("/mobile/product/:productID", (req, res, next) => {
-        GetProductPage(req, res, con)
+        GetProductPage(req, res, con,true)
     })
 })
 //#endregion
