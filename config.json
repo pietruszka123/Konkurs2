@@ -3,9 +3,9 @@
     "x-Powered-By": "Gaba",
     "debugLog":false,
     "api-version":"v2",
-    "DataBase-host":"fdb32.awardspace.net",
+    "DataBase-host":"remotemysql.com",
     "DataBase-port": 3306,
-    "DataBase-user": "3958541_echohelper",
-    "DataBase-password":"nowehaslo123",
-    "DataBase-database":"3958541_echohelper"
+    "DataBase-user": "W5pYDkQFaT",
+    "DataBase-password":"dYf2pxTyCa",
+    "DataBase-database":"W5pYDkQFaT"
 }
