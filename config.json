@@ -3,9 +3,9 @@
     "x-Powered-By": "Gaba",
     "debugLog":false,
     "api-version":"v2",
-    "DataBase-host":"sql100.epizy.com",
+    "DataBase-host":"fdb32.awardspace.net",
     "DataBase-port": 3306,
-    "DataBase-user": "epiz_29992921",
+    "DataBase-user": "3958541_echohelper",
     "DataBase-password":"nowehaslo123",
-    "DataBase-database":"epiz_29992921_ecohelper"
+    "DataBase-database":"3958541_echohelper"
 }
