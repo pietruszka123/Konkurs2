@@ -47,6 +47,7 @@ var app = express();
 
 app.use(express.json())
 const PORT = process.env.PORT || 8080;
+
 var server = app.listen(PORT, function () {
     console.log("Dziala")
 })
