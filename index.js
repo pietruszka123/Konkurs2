@@ -68,18 +68,18 @@ function isMobile(req, res, next) {
         // view for mobile view e.g. res.render('mobileview');
 
         res.redirect("/mobile/");
-    }else{
+    } else {
         next();
     }
 }
-app.use("/",function (req, res, next) {
-    if(req.originalUrl == "/")isMobile(req,res,next)
-    else{
+app.use("/", function (req, res, next) {
+    if (req.originalUrl == "/") isMobile(req, res, next)
+    else {
         next()
     }
-    
+
 });
-app.get("/mobile",function(req,res,next){
+app.get("/mobile", function (req, res, next) {
     res.sendFile('public/index.html', { root: __dirname })
 })
 app.use("/", express.static('public'));
@@ -105,7 +105,7 @@ app.post("/getProduct.json", (req, res, next) => {
 })
 
 
-function GetProductPage(req, res, con,mobile = false) {
+function GetProductPage(req, res, con, mobile = false) {
     return new Promise((resolve, rejects) => {
         var sql = "SELECT * FROM ecohelper WHERE codeProduct = " + req.params.productID;
         if (req.params.productID.match(/^[0-9]+$/) != null) {
@@ -116,21 +116,21 @@ function GetProductPage(req, res, con,mobile = false) {
                 }
                 console.log(req.params)
                 res.statusCode = 200
-                if(mobile)var file = fs.readFileSync("./public/mobile/index.html")
+                if (mobile) var file = fs.readFileSync("./public/mobile/index.html")
                 else var file = fs.readFileSync("./public/index.html")
-                
+
                 var files = file.toString('utf8');
-                if (result && result.length){
+                if (result && result.length) {
                     files = files.replace(`<meta name="productData" content="null">`, `<meta name="productData" content='${JSON.stringify(result)}'><meta name="productID" content=${req.params.productID}>`)
                     //file = files.replace(`<title>EcoHelper</title>`,`<title>EcoHelper-${}</title>`)
-                } 
+                }
                 //res.sendFile('public/index.html', {root: __dirname })
                 res.send(files)
             })
         } else {
-            if(mobile)res.sendFile('public/index.html', { root: __dirname })
+            if (mobile) res.sendFile('public/index.html', { root: __dirname })
             else res.sendFile('public/index.html', { root: __dirname })
-            
+
         }
     })
 }
@@ -207,7 +207,53 @@ con.connect(function (erroro) {
                 if (err) {
                     console.log(err)
                     res.writeHead(404, head)
-                    res.end(JSON.stringify({ error: "Error?" }))
+                    res.end(JSON.stringify({status: 0, error: "Error?" }))
+                    return
+                }
+                console.log(result)
+                res.writeHead(200, head)
+                res.end(JSON.stringify({ "status": 1 }))
+            })
+        }
+    })
+    app.post("/addAlternative.json", (req, res, next) => {
+        if (req.body && req.body.alternativeContent && req.body.alternativeImage && req.body.productCode && req.body.id) {
+            var sql = `UPDATE ecohelper SET betterAlternative = JSON_ARRAY_APPEND(betterAlternative,'$.alternatives',JSON_OBJECT("alternativeContent","${req.body.alternativeContent}","alternativeImage","${req.body.alternativeImage}","alternativePoints","${0}","id","${req.body.id}")) WHERE codeProduct = ${req.body.productCode}`
+            con.query(sql, (err, result, f) => {
+                if (err) {
+                    console.log(err)
+                    res.writeHead(404, head)
+                    res.end(JSON.stringify({status: 0, error: "Error?" }))
+                    return
+                }
+                console.log(result)
+                res.writeHead(200, head)
+                res.end(JSON.stringify({ "status": 1 }))
+            })
+        }
+    })
+    app.post("/updateAlternative.json", (req, res, next) => {
+        if (req.body && req.body.alternativePoints && req.body.productCode) {
+            var sql = `UPDATE ecohelper
+            INNER JOIN JSON_TABLE(
+              ecohelper.betterAlternative,
+              '$.alternatives[*]' COLUMNS(
+                rowid FOR ORDINALITY,
+                id INT PATH '$.id'
+              )
+            ) der ON der.id = 0
+          SET ecohelper.betterAlternative =
+            JSON_REPLACE(
+              ecohelper.betterAlternative,
+              CONCAT('$.alternatives[', der.rowid - 1, '].alternativePoints'),
+              ${req.body.alternativePoints})
+          WHERE
+            ecohelper.codeProduct = ${req.body.productCode};`
+            con.query(sql, (err, result, f) => {
+                if (err) {
+                    console.log(err)
+                    res.writeHead(404, head)
+                    res.end(JSON.stringify({status: 0, error: "Error?" }))
                     return
                 }
                 console.log(result)
@@ -217,16 +263,15 @@ con.connect(function (erroro) {
         }
     })
     app.post("/addComment.json", (req, res, next) => {
-        if (req.body && req.body.comment && req.body.productCode) {
+        if (req.body && req.body.comment && req.body.productCode && req.body.id) {
             console.log("add")
             //var commentObject = {"commentContent": req.body.comment,"commentPoints": 0}
             var sql = `UPDATE ecohelper SET comments = JSON_ARRAY_APPEND(comments,'$.comments',JSON_OBJECT("commentContent","${req.body.comment}","commentPoints","${0}","id","${req.body.id}")) WHERE codeProduct = ${req.body.productCode}`
-            console.log(sql)
             con.query(sql, (err, result, f) => {
                 if (err) {
                     console.log(err)
                     res.writeHead(404, head)
-                    res.end(JSON.stringify({ error: "Error?" }))
+                    res.end(JSON.stringify({status: 0, error: "Error?" }))
                     return
                 }
                 console.log(result)
@@ -239,7 +284,7 @@ con.connect(function (erroro) {
         GetProductPage(req, res, con)
     })
     app.get("/mobile/product/:productID", (req, res, next) => {
-        GetProductPage(req, res, con,true)
+        GetProductPage(req, res, con, true)
     })
 })
 //#endregion

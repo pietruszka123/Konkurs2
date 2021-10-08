@@ -1,6 +1,8 @@
 document.addEventListener("DOMContentLoaded", function () {
     window.commentsLength = 0
     window.commentsMax = 0
+    window.alternativesLength = 0
+    window.alternativesMax = 0
     var product = document.head.querySelector("[name~=productData][content]").content;
     var productID = document.head.querySelector("[name~=productID][content]");
     //console.log(product)
@@ -15,7 +17,7 @@ document.addEventListener("DOMContentLoaded", function () {
             updateAlternatives(JSON.parse(comments[0].betterAlternative))
             updateInfo(comments[0].codeProduct, false)
             setComments(JSON.parse(comments[0].comments));
-            document.getElementById("co2").innerText = comments[0].co2Cost 
+            document.getElementById("co2").innerText = comments[0].co2Cost
         } catch (error) {
             //console.error(error)
         }
@@ -30,7 +32,7 @@ document.addEventListener("DOMContentLoaded", function () {
  * @param {Element} addto 
  * @param {object} alt 
  */
-function addAlternative(addto,alt){
+function addAlternative(addto, alt) {
     var a = `<div class="zamiennik">
     <img src="${alt.alternativeImage}"
         alt="image of ${alt.alternativeContent}">
@@ -38,14 +40,17 @@ function addAlternative(addto,alt){
 </div>`
     addto.insertAdjacentHTML('beforeend', a)
 }
-function updateAlternatives(alt){
+function updateAlternatives(alt) {
     console.log(alt)
     var alt = alt.alternatives
     var altCon = document.getElementsByClassName("zamienniki")[0]
+    window.alternativesLength = alt.length
+    
     altCon.innerHTML = ""
     for (let i = 0; i < alt.length; i++) {
         console.log(i)
-        addAlternative(altCon,alt[i])
+        if(alt[i].id && parseInt(alt[i].id) > window.alternativesMax)window.alternativesMax = alt[i].id
+        addAlternative(altCon, alt[i])
     }
 }
 /**
@@ -79,17 +84,17 @@ function addComment(addto, commentObj, i, focus = false) {
     </div>
 </div>`
     addto.insertAdjacentHTML('beforeend', a)
-    document.getElementById(`u${commentObj.id}`).addEventListener("click",(e)=>{
-        var  text =document.getElementById(commentObj.id)
-        sendUpdateComment({productCode:window.productCode,commentPoints:parseInt(text.innerText)+1}).then((r)=>{         
-            text.innerText = parseInt(text.innerText)+1
+    document.getElementById(`u${commentObj.id}`).addEventListener("click", (e) => {
+        var text = document.getElementById(commentObj.id)
+        sendUpdateComment({ productCode: window.productCode, commentPoints: parseInt(text.innerText) + 1 }).then((r) => {
+            text.innerText = parseInt(text.innerText) + 1
         })
 
     })
-    document.getElementById(`d${commentObj.id}`).addEventListener("click",(e)=>{
-        var  text =document.getElementById(commentObj.id)
-        sendUpdateComment({productCode:window.productCode,commentPoints:parseInt(text.innerText)-1}).then((r)=>{         
-            text.innerText = parseInt(text.innerText)-1
+    document.getElementById(`d${commentObj.id}`).addEventListener("click", (e) => {
+        var text = document.getElementById(commentObj.id)
+        sendUpdateComment({ productCode: window.productCode, commentPoints: parseInt(text.innerText) - 1 }).then((r) => {
+            text.innerText = parseInt(text.innerText) - 1
         })
     })
     if (focus) addto.lastChild.scrollIntoView()
@@ -161,7 +166,39 @@ function sendGetFromDataBase(toSend) {
     })
 }
 //#region requests
-function sendUpdateComment(tosend){
+function sendUpdateAlternative(tosend) {
+    return new Promise((resolve, reject) => {
+        var xhr = new XMLHttpRequest();
+        xhr.open("POST", "/addAlternative.json", true);
+        xhr.setRequestHeader('Content-Type', 'application/json');
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState === 4) {
+                //if(!xhr.response.product)return;
+                console.log(JSON.parse(xhr.response))
+                resolve(JSON.parse(xhr.response))
+            }
+        }
+        //{productCode:window.productCode,alternativePoints:90,alternativeContent:"?",alternativeImage:"image",id:2}
+        xhr.send(JSON.stringify(tosend));
+    })
+}
+function sendNewAlternative(tosend) {
+    return new Promise((resolve, reject) => {
+        var xhr = new XMLHttpRequest();
+        xhr.open("POST", "/updateAlternative.json", true);
+        xhr.setRequestHeader('Content-Type', 'application/json');
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState === 4) {
+                //if(!xhr.response.product)return;
+                console.log(JSON.parse(xhr.response))
+                resolve(JSON.parse(xhr.response))
+            }
+        }
+        //{productCode:window.productCode,alternativePoints:90}
+        xhr.send(JSON.stringify(tosend));
+    })
+}
+function sendUpdateComment(tosend) {
     return new Promise((resolve, reject) => {
         var xhr = new XMLHttpRequest();
         xhr.open("POST", "/updateComment.json", true);
@@ -231,7 +268,7 @@ function updateInfo(tosend, comm) {
     if (comm) {
         sendGetFromDataBase(tosend).then((r) => {
             console.log(r)
-            if (r.comments){
+            if (r.comments) {
                 setComments(JSON.parse(r.comments))
                 document.getElementById("co2").innerText = r.co2Cost
                 updateAlternatives(JSON.parse(r.betterAlternative))
@@ -279,7 +316,7 @@ Quagga.init({
     Quagga.onProcessed((e) => {
         if (e != null) {
             if (e.codeResult) {
-                updateInfo(e.codeResult.code,true)
+                updateInfo(e.codeResult.code, true)
                 Quagga.stop();
             }
             //console.log(e);
@@ -302,7 +339,7 @@ function initSendComment() {
             e.target.wait = true
             document.getElementById("komentarzInput").value = ""
             sendNewComment({ productCode: window.productCode, comment: text, id: window.commentsMax + 1 }).then((r) => {
-                addComment(document.getElementsByClassName("zbiorKomentarzy")[0], { "commentContent": text ,"commentPoints":0}, window.commentsLength, true)
+                addComment(document.getElementsByClassName("zbiorKomentarzy")[0], { "commentContent": text, "commentPoints": 0 }, window.commentsLength, true)
                 window.commentsLength++;
                 window.commentsMax++;
                 setTimeout(() => {
@@ -318,5 +355,5 @@ function initSendComment() {
 }
 //#endregion
 function getProduct(e) {
-    if(/^\d+$/.test(document.getElementById("inputText").value))updateInfo(document.getElementById("inputText").value, true)
+    if (/^\d+$/.test(document.getElementById("inputText").value)) updateInfo(document.getElementById("inputText").value, true)
 }
