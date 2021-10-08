@@ -20,6 +20,7 @@ document.addEventListener("DOMContentLoaded", function() {
     }else{
         noComents();
     }
+    initSendComment();
 });
 /**
  * 
@@ -31,7 +32,7 @@ document.addEventListener("DOMContentLoaded", function() {
 function addComment(addto,commentObj,i,focus = false){
     if(window.commentsLength == 0){
         commentContainer.innerHTML = "";
-        commentContainer.append(addCommentObj)
+        //commentContainer.append(addCommentObj)
         after = false
     }
     var a = `<div class="komentarz">
@@ -50,13 +51,12 @@ function setComments(r){
     var comments = r.comments;
     window.commentsLength = comments.length
     var commentContainer = document.getElementsByClassName("zbiorKomentarzy")[0]
-    if(addCommentObj == undefined)addCommentObj = commentContainer.childNodes[1];
     comments.sort((a, b) => {
         return a.commentPoints - b.commentPoints;
     });
     comments.reverse()
     commentContainer.innerHTML = "";
-    commentContainer.append(addCommentObj)
+    //commentContainer.append(addCommentObj)
     for (let i = 0; i < comments.length; i++) {
         //console.log(i)
         if(comments[i].id && parseInt(comments[i].id) > window.commentsMax){
@@ -65,7 +65,6 @@ function setComments(r){
         //console.log(comments[i])
         addComment(commentContainer,comments[i],i)
     }
-    initSendComment()
 }
 //#region requests
 /**
@@ -132,11 +131,18 @@ function sendNewComment(tosend){
 }
 function noComents(){
     var commentContainer = document.getElementsByClassName("zbiorKomentarzy")[0]
-    if(addCommentObj == undefined)addCommentObj = commentContainer.childNodes[1];
-    commentContainer.innerHTML = ""
-    commentContainer.append(addCommentObj)
-    commentContainer.append("Brak Komentarzy")
-    initSendComment()
+    //if(addCommentObj == undefined)addCommentObj = commentContainer.childNodes[1];
+    //commentContainer.innerHTML = ""
+    //commentContainer.append(addCommentObj)
+    var text = document.createElement("h3")
+    text.style = "font-family: 'Source Sans Pro', sans-serif;"
+    if(window.productCode){
+        text.textContent = "Brak Komentarzy"
+    }
+    else{
+        //text.textContent = "Tutaj pojawią się komentarze"
+    } 
+    //commentContainer.append(text)
 }
 //#endregion
 var addCommentObj;
@@ -219,7 +225,7 @@ Quagga.init({
 document.getElementById("przycisk").addEventListener("click", getProduct)
 function initSendComment(){
 document.getElementById("komentarzSubmit").addEventListener("click",(e)=>{
-    //console.log("click")
+    console.log("click")
     var text = document.getElementById("komentarzInput").value
     text.trim()
     if(!e.target.wait)e.target.wait = false
@@ -235,7 +241,9 @@ document.getElementById("komentarzSubmit").addEventListener("click",(e)=>{
             },5000)
         });
     }else{
-        //cooldown
+        setTimeout(()=>{
+            document.getElementById("komentarzInput").placeholder = "poczekaj"
+        },5000)
     }
 })
 }

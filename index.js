@@ -80,7 +80,7 @@ app.use("/",function (req, res, next) {
     
 });
 app.get("/mobile",function(req,res,next){
-    res.sendFile('public/mobile/index.html', { root: __dirname })
+    res.sendFile('public/index.html', { root: __dirname })
 })
 app.use("/", express.static('public'));
 router.get("/", (req, res, next) => {
@@ -125,7 +125,7 @@ function GetProductPage(req, res, con,mobile = false) {
                 res.send(files)
             })
         } else {
-            if(mobile)res.sendFile('public/mobile,index.html', { root: __dirname })
+            if(mobile)res.sendFile('public/index.html', { root: __dirname })
             else res.sendFile('public/index.html', { root: __dirname })
             
         }
