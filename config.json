@@ -3,9 +3,9 @@
     "x-Powered-By": "Gaba",
     "debugLog":false,
     "api-version":"v2",
-    "DataBase-host":"localhost",
+    "DataBase-host":"remotemysql.com",
     "DataBase-port": 3306,
-    "DataBase-user": "root",
-    "DataBase-password":"",
-    "DataBase-database":"ecohelper"
+    "DataBase-user": "W5pYDkQFaT",
+    "DataBase-password":"dYf2pxTyCa",
+    "DataBase-database":"W5pYDkQFaT"
 }
