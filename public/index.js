@@ -5,6 +5,7 @@ document.addEventListener("DOMContentLoaded", function () {
     window.alternativesMax = 0
     var product = document.head.querySelector("[name~=productData][content]").content;
     var productID = document.head.querySelector("[name~=productID][content]");
+    addAltObj = document.getElementsByClassName("dodajZamiennik")[0]
     //console.log(product)
     if (productID) {
         window.productCode = productID.content
@@ -45,13 +46,21 @@ function updateAlternatives(alt) {
     var alt = alt.alternatives
     var altCon = document.getElementsByClassName("zamienniki")[0]
     window.alternativesLength = alt.length
-    
+    addAltObj = document.getElementsByClassName("dodajZamiennik")[0]
     altCon.innerHTML = ""
     for (let i = 0; i < alt.length; i++) {
         console.log(i)
         if(alt[i].id && parseInt(alt[i].id) > window.alternativesMax)window.alternativesMax = alt[i].id
         addAlternative(altCon, alt[i])
     }
+    altCon.append(addAltObj)
+    
+    document.getElementById("zamiennikSubmit").addEventListener("click",(e)=>{
+
+        sendNewAlternative({productCode:window.productCode,alternativePoints:0,alternativeContent:document.getElementById("zamiennikAddTitle").value,alternativeImage:document.getElementById("zamiennikAddLink").value,id:window.alternativesMax})
+        document.getElementById("zamiennikAddTitle").value = ""
+        document.getElementById("zamiennikAddLink").value = ""
+    })
 }
 /**
  * 
@@ -166,7 +175,7 @@ function sendGetFromDataBase(toSend) {
     })
 }
 //#region requests
-function sendUpdateAlternative(tosend) {
+function sendNewAlternative(tosend) {
     return new Promise((resolve, reject) => {
         var xhr = new XMLHttpRequest();
         xhr.open("POST", "/addAlternative.json", true);
@@ -182,7 +191,7 @@ function sendUpdateAlternative(tosend) {
         xhr.send(JSON.stringify(tosend));
     })
 }
-function sendNewAlternative(tosend) {
+function sendUpdateAlternative(tosend) {
     return new Promise((resolve, reject) => {
         var xhr = new XMLHttpRequest();
         xhr.open("POST", "/updateAlternative.json", true);
@@ -248,7 +257,7 @@ function noComents() {
     commentContainer.append(text)
 }
 //#endregion
-var addCommentObj;
+var addAltObj;
 function updateInfo(tosend, comm) {
     sendGetProduct(tosend).then((r) => {
         if (!r.product) return
