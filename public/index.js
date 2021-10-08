@@ -1,31 +1,48 @@
 document.addEventListener("DOMContentLoaded", function() {
     window.commentsLength = 0
+    window.commentsMax = 0
     var product = document.head.querySelector("[name~=productData][content]").content;
     var productID = document.head.querySelector("[name~=productID][content]");
-    console.log(product)
+    //console.log(product)
     if (productID) {
         window.productCode = productID.content
     }
     if (product != "null") {
         try {
             var comments = JSON.parse(product)
-            console.log(comments)
-            console.log(comments[0])
+                //console.log(comments)
+                //console.log(comments[0])
             updateInfo(comments[0].codeProduct, false)
             setComments(JSON.parse(comments[0].comments));
         } catch (error) {
-            console.error(error)
+            //console.error(error)
         }
     }
 });
-
+/**
+ * 
+ * @param {Element} addto 
+ * @param {Element} commentObj 
+ * @param {number} i 
+ * @param {boolean} after 
+ */
 function addComment(addto, commentObj, i, after = false) {
     var a = `<div class="komentarz">
     <div class="miejsce ${(i < 3) ? `m${i+1}` : ""}"><p>#${i+1}</p></div>
     <div class="wiadomosc">${commentObj.commentContent}<p></p></div>
 </div>`
     addto.insertAdjacentHTML((after) ? 'afterbegin' : 'beforeend',a)
+    if(after){
+        //console.dir(addto)
+        var temp = addto.childNodes[0]
+        //console.log(temp)
+        addto.childNodes[0].parentNode.insertBefore(addto.childNodes[1],addto.childNodes[0])
+    }
 }
+/**
+ * 
+ * @param {object} r 
+ */
 function setComments(r){
     var comments = r.comments;
     var commentContainer = document.getElementsByClassName("zbiorKomentarzy")[0]
@@ -37,14 +54,21 @@ function setComments(r){
     commentContainer.innerHTML = "";
     commentContainer.append(addCommentObj)
     for (let i = 0; i < comments.length; i++) {
-        console.log(i)
-        
-        console.log(comments[i])
+        //console.log(i)
+        if(comments[i].id && comments[i].id > window.commentsMax){
+            window.commentsMax = comments[i].id
+        }
+        //console.log(comments[i])
         addComment(commentContainer,comments[i],i)
     }
     initSendComment()
 }
 //#region requests
+/**
+ * 
+ * @param {unknown} toSend 
+ * @returns {object}
+ */
 function sendGetProduct(toSend) {
     return new Promise((resolve, reject) => {
         var xhr = new XMLHttpRequest();
@@ -53,13 +77,19 @@ function sendGetProduct(toSend) {
         xhr.onreadystatechange = function () {
             if (xhr.readyState === 4) {
                 //if(!xhr.response.product)return;
-                console.log(JSON.parse(xhr.response))
+                //console.log(JSON.parse(xhr.response))
                 resolve(JSON.parse(xhr.response))
             }
         }
         xhr.send(JSON.stringify({ productCode: toSend }));
     })
 }
+//#region requests
+/**
+ * 
+ * @param {unknown} toSend 
+ * @returns {object}
+ */
 function sendGetFromDataBase(toSend) {
     return new Promise((resolve, reject) => {
         var xhr = new XMLHttpRequest();
@@ -68,13 +98,19 @@ function sendGetFromDataBase(toSend) {
         xhr.onreadystatechange = function () {
             if (xhr.readyState === 4) {
                 //if(!xhr.response.product)return;
-                console.log(JSON.parse(xhr.response))
+                //console.log(JSON.parse(xhr.response))
                 resolve(JSON.parse(xhr.response))
             }
         }
         xhr.send(JSON.stringify({ productCode: toSend }));
     })
 }
+//#region requests
+/**
+ * 
+ * @param {unknown} toSend 
+ * @returns {object}
+ */
 function sendNewComment(tosend){
     return new Promise((resolve, reject) => {
         var xhr = new XMLHttpRequest();
@@ -83,7 +119,7 @@ function sendNewComment(tosend){
         xhr.onreadystatechange = function () {
             if (xhr.readyState === 4) {
                 //if(!xhr.response.product)return;
-                console.log(JSON.parse(xhr.response))
+                //console.log(JSON.parse(xhr.response))
                 resolve(JSON.parse(xhr.response))
             }
         }
@@ -98,7 +134,7 @@ function updateInfo(tosend,comm) {
         history.pushState('witaj jeśli widzisz tą wiadomosc to cos', 'EcoHelper', `/product/${tosend}`);
         window.productCode = tosend;
         var product = r.product
-        console.log(r)
+        //console.log(r)
         var a = `<h3>Nazwa produktu:</h3>
         <p> ${product.product_name}</p>
         <h3>Opakowanie:</h3>
@@ -111,7 +147,8 @@ function updateInfo(tosend,comm) {
     })
     if(comm){
     sendGetFromDataBase(tosend).then((r) => {
-        setComments(JSON.parse(r[0].comments))
+        console.log(r)
+        setComments(JSON.parse(r.comments))
     })
     }
 }
@@ -139,15 +176,15 @@ Quagga.init({
     }
 }, function (err) {
     if (err) {
-        console.log(err);
+        //console.log(err);
         document.body.innerHTML = err
         return
     }
-    console.log("Initialization finished. Ready to start");
+    //console.log("Initialization finished. Ready to start");
     Quagga.start();
     /*Quagga.onDetected((e) => {
         if (e != null) {
-            console.log(e)
+            //console.log(e)
             document.body.innerHTML = "tak"
         }
     })*/
@@ -157,7 +194,7 @@ Quagga.init({
                 updateInfo(e.codeResult.code)
                 Quagga.stop();
             }
-            console.log(e);
+            //console.log(e);
 
 
         }
@@ -169,7 +206,7 @@ Quagga.init({
 document.getElementById("przycisk").addEventListener("click", getProduct)
 function initSendComment(){
 document.getElementById("komentarzSubmit").addEventListener("click",(e)=>{
-    console.log("click")
+    //console.log("click")
     var text = document.getElementById("komentarzInput").value
     text.trim()
     if(!e.target.wait)e.target.wait = false
@@ -189,5 +226,5 @@ document.getElementById("komentarzSubmit").addEventListener("click",(e)=>{
 }
 //#endregion
 function getProduct(e) {
-    updateInfo(document.getElementById("inputText").value)
+    updateInfo(document.getElementById("inputText").value,true)
 }
