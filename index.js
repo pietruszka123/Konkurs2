@@ -120,7 +120,10 @@ function GetProductPage(req, res, con,mobile = false) {
                 else var file = fs.readFileSync("./public/index.html")
                 
                 var files = file.toString('utf8');
-                if (result && result.length) files = files.replace(`<meta name="productData" content="null">`, `<meta name="productData" content='${JSON.stringify(result)}'><meta name="productID" content=${req.params.productID}>`)
+                if (result && result.length){
+                    files = files.replace(`<meta name="productData" content="null">`, `<meta name="productData" content='${JSON.stringify(result)}'><meta name="productID" content=${req.params.productID}>`)
+                    //file = files.replace(`<title>EcoHelper</title>`,`<title>EcoHelper-${}</title>`)
+                } 
                 //res.sendFile('public/index.html', {root: __dirname })
                 res.send(files)
             })

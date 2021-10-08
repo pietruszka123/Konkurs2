@@ -12,8 +12,10 @@ document.addEventListener("DOMContentLoaded", function () {
             var comments = JSON.parse(product)
             //console.log(comments)
             //console.log(comments[0])
+            updateAlternatives(JSON.parse(comments[0].betterAlternative))
             updateInfo(comments[0].codeProduct, false)
             setComments(JSON.parse(comments[0].comments));
+            document.getElementById("co2").innerText = comments[0].co2Cost 
         } catch (error) {
             //console.error(error)
         }
@@ -22,6 +24,29 @@ document.addEventListener("DOMContentLoaded", function () {
     }
     initSendComment();
 });
+/**
+ * 
+ * @param {Element} addto 
+ * @param {object} alt 
+ */
+function addAlternative(addto,alt){
+    var a = `<div class="zamiennik">
+    <img src="${alt.alternativeImage}"
+        alt="image of ${alt.alternativeContent}">
+    <p>${alt.alternativeContent}</p>
+</div>`
+    addto.insertAdjacentHTML('beforeend', a)
+}
+function updateAlternatives(alt){
+    console.log(alt)
+    var alt = alt.alternatives
+    var altCon = document.getElementsByClassName("zamienniki")[0]
+    altCon.innerHTML = ""
+    for (let i = 0; i < alt.length; i++) {
+        console.log(i)
+        addAlternative(altCon,alt[i])
+    }
+}
 /**
  * 
  * @param {Element} addto 
@@ -35,13 +60,12 @@ function addComment(addto, commentObj, i, focus = false) {
         //commentContainer.append(addCommentObj)
         after = false
     }
-    console.log(commentObj)
     var a = `<div class="komentarz">
     <div class="ocenianieKomentarzy">
         <button class="updoot" id="u${commentObj.id}">
             <h2>V</h2>
-        </button><br>
-        <p id="${commentObj.id}">${commentObj.commentPoints}</p><br>
+        </button>
+        <p id="${commentObj.id}">${commentObj.commentPoints}</p>
         <button class="downdoot" id="d${commentObj.id}">
             <h2>V</h2>
         </button>
@@ -199,13 +223,18 @@ function updateInfo(tosend, comm) {
         <h3>Opakowanie:</h3>
         <p>${product.packaging}</p>
         <h3>Koszt CO<sub>2</sub>:</h3>
-        <p>Nie wprowadzono kodu</p>`
+        <p id="co2">${document.getElementById("co2").innerText}</p>`
         document.getElementsByClassName("tekstInf")[0].innerHTML = a
+        document.getElementsByClassName("zdjecie")[0].innerHTML = `<img src="${product.image_url}" alt="${product.product_name}">`
     })
     if (comm) {
         sendGetFromDataBase(tosend).then((r) => {
             console.log(r)
-            if (r.comments) setComments(JSON.parse(r.comments))
+            if (r.comments){
+                setComments(JSON.parse(r.comments))
+                document.getElementById("co2").innerText = r.co2Cost
+                updateAlternatives(JSON.parse(r.betterAlternative))
+            }
             else {
                 noComents()
             }
@@ -249,7 +278,7 @@ Quagga.init({
     Quagga.onProcessed((e) => {
         if (e != null) {
             if (e.codeResult) {
-                updateInfo(e.codeResult.code)
+                updateInfo(e.codeResult.code,true)
                 Quagga.stop();
             }
             //console.log(e);
