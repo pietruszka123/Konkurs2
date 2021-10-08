@@ -1,4 +1,4 @@
-document.addEventListener("DOMContentLoaded", function() {
+document.addEventListener("DOMContentLoaded", function () {
     window.commentsLength = 0
     window.commentsMax = 0
     var product = document.head.querySelector("[name~=productData][content]").content;
@@ -10,14 +10,14 @@ document.addEventListener("DOMContentLoaded", function() {
     if (product != "null") {
         try {
             var comments = JSON.parse(product)
-                //console.log(comments)
-                //console.log(comments[0])
+            //console.log(comments)
+            //console.log(comments[0])
             updateInfo(comments[0].codeProduct, false)
             setComments(JSON.parse(comments[0].comments));
         } catch (error) {
             //console.error(error)
         }
-    }else{
+    } else {
         noComents();
     }
     initSendComment();
@@ -29,25 +29,52 @@ document.addEventListener("DOMContentLoaded", function() {
  * @param {number} i 
  * @param {boolean} after 
  */
-function addComment(addto,commentObj,i,focus = false){
-    if(window.commentsLength == 0){
+function addComment(addto, commentObj, i, focus = false) {
+    if (window.commentsLength == 0) {
         commentContainer.innerHTML = "";
         //commentContainer.append(addCommentObj)
         after = false
     }
+    console.log(commentObj)
     var a = `<div class="komentarz">
-    <div class="miejsce ${(i < 3) ? `m${i+1}` : ""}"><p>#${i+1}</p></div>
-    <div class="wiadomosc">${commentObj.commentContent}<p></p></div>
+    <div class="ocenianieKomentarzy">
+        <button class="updoot" id="u${commentObj.id}">
+            <h2>V</h2>
+        </button><br>
+        <p id="${commentObj.id}">${commentObj.commentPoints}</p><br>
+        <button class="downdoot" id="d${commentObj.id}">
+            <h2>V</h2>
+        </button>
+    </div>
+    <div class="miejsce ${(i < 3) ? `m${i + 1}` : ""}">
+        <p>#${i + 1}</p>
+    </div>
+    <div class="wiadomosc">
+        <p>${commentObj.commentContent}</p>
+    </div>
 </div>`
-    addto.insertAdjacentHTML('beforeend',a)
-    if(focus)addto.lastChild.scrollIntoView()
+    addto.insertAdjacentHTML('beforeend', a)
+    document.getElementById(`u${commentObj.id}`).addEventListener("click",(e)=>{
+        var  text =document.getElementById(commentObj.id)
+        sendUpdateComment({productCode:window.productCode,commentPoints:parseInt(text.innerText)+1}).then((r)=>{         
+            text.innerText = parseInt(text.innerText)+1
+        })
+
+    })
+    document.getElementById(`d${commentObj.id}`).addEventListener("click",(e)=>{
+        var  text =document.getElementById(commentObj.id)
+        sendUpdateComment({productCode:window.productCode,commentPoints:parseInt(text.innerText)-1}).then((r)=>{         
+            text.innerText = parseInt(text.innerText)-1
+        })
+    })
+    if (focus) addto.lastChild.scrollIntoView()
 
 }
 /**
  * 
  * @param {object} r 
  */
-function setComments(r){
+function setComments(r) {
     var comments = r.comments;
     window.commentsLength = comments.length
     var commentContainer = document.getElementsByClassName("zbiorKomentarzy")[0]
@@ -59,11 +86,11 @@ function setComments(r){
     //commentContainer.append(addCommentObj)
     for (let i = 0; i < comments.length; i++) {
         //console.log(i)
-        if(comments[i].id && parseInt(comments[i].id) > window.commentsMax){
+        if (comments[i].id && parseInt(comments[i].id) > window.commentsMax) {
             window.commentsMax = comments[i].id
         }
         //console.log(comments[i])
-        addComment(commentContainer,comments[i],i)
+        addComment(commentContainer, comments[i], i)
     }
 }
 //#region requests
@@ -109,12 +136,27 @@ function sendGetFromDataBase(toSend) {
     })
 }
 //#region requests
+function sendUpdateComment(tosend){
+    return new Promise((resolve, reject) => {
+        var xhr = new XMLHttpRequest();
+        xhr.open("POST", "/updateComment.json", true);
+        xhr.setRequestHeader('Content-Type', 'application/json');
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState === 4) {
+                //if(!xhr.response.product)return;
+                //console.log(JSON.parse(xhr.response))
+                resolve(JSON.parse(xhr.response))
+            }
+        }
+        xhr.send(JSON.stringify(tosend));
+    })
+}
 /**
  * 
  * @param {unknown} toSend 
  * @returns {object}
  */
-function sendNewComment(tosend){
+function sendNewComment(tosend) {
     return new Promise((resolve, reject) => {
         var xhr = new XMLHttpRequest();
         xhr.open("POST", "/addComment.json", true);
@@ -129,47 +171,45 @@ function sendNewComment(tosend){
         xhr.send(JSON.stringify(tosend));
     })
 }
-function noComents(){
+function noComents() {
     var commentContainer = document.getElementsByClassName("zbiorKomentarzy")[0]
     //if(addCommentObj == undefined)addCommentObj = commentContainer.childNodes[1];
     commentContainer.innerHTML = ""
     var text = document.createElement("h3")
     text.style = "font-family: 'Source Sans Pro', sans-serif;"
-    if(window.productCode){
+    if (window.productCode) {
         text.textContent = "Brak Komentarzy"
     }
-    else{
+    else {
         text.textContent = "Tutaj pojawią się komentarze"
-    } 
+    }
     commentContainer.append(text)
 }
 //#endregion
 var addCommentObj;
-function updateInfo(tosend,comm) {
+function updateInfo(tosend, comm) {
     sendGetProduct(tosend).then((r) => {
         if (!r.product) return
         history.pushState('witaj jeśli widzisz tą wiadomosc to cos', 'EcoHelper', `/product/${tosend}`);
         window.productCode = tosend;
         var product = r.product
         //console.log(r)
-        var a = `<h3>Nazwa produktu:</h3>
-        <p> ${product.product_name}</p>
+        var a = `<h3>Produkt:</h3>
+        <p>${product.product_name}</p>
         <h3>Opakowanie:</h3>
-        <p> ${product.packaging}</p>
-        <h3>Info:</h3>
-        <p> Pewnie się zastanawiacie co mogłoby się stać jak wstawimy więcej informacji... no ja też więc piszę jakiś dłuższy tekst bo nie będę się szmacił lorem ipsum.</p>
-        <h3>Dalsze:</h3>
-        <p> </p>`
+        <p>${product.packaging}</p>
+        <h3>Koszt CO<sub>2</sub>:</h3>
+        <p>Nie wprowadzono kodu</p>`
         document.getElementsByClassName("tekstInf")[0].innerHTML = a
     })
-    if(comm){
-    sendGetFromDataBase(tosend).then((r) => {
-        console.log(r)
-        if(r.comments)setComments(JSON.parse(r.comments))
-        else{
-            noComents()
-        }
-    })
+    if (comm) {
+        sendGetFromDataBase(tosend).then((r) => {
+            console.log(r)
+            if (r.comments) setComments(JSON.parse(r.comments))
+            else {
+                noComents()
+            }
+        })
     }
 }
 Quagga.init({
@@ -222,31 +262,31 @@ Quagga.init({
 });
 //#region Events
 document.getElementById("przycisk").addEventListener("click", getProduct)
-function initSendComment(){
-document.getElementById("komentarzSubmit").addEventListener("click",(e)=>{
-    console.log("click")
-    var text = document.getElementById("komentarzInput").value
-    text.trim()
-    if(!e.target.wait)e.target.wait = false
-    if(text.length != 0 && window.productCode && !e.target.wait){
-        e.target.wait = true
-        document.getElementById("komentarzInput").value = ""
-        sendNewComment({productCode: window.productCode,comment:text,id:window.commentsMax+1}).then((r)=>{
-            addComment(document.getElementsByClassName("zbiorKomentarzy")[0],{"commentContent":text},window.commentsLength,true)
-            window.commentsLength++;
-            window.commentsMax++;
-            setTimeout(()=>{
-                e.target.wait = false
-            },5000)
-        });
-    }else{
-        setTimeout(()=>{
-            document.getElementById("komentarzInput").placeholder = "poczekaj"
-        },5000)
-    }
-})
+function initSendComment() {
+    document.getElementById("komentarzSubmit").addEventListener("click", (e) => {
+        console.log("click")
+        var text = document.getElementById("komentarzInput").value
+        text.trim()
+        if (!e.target.wait) e.target.wait = false
+        if (text.length != 0 && window.productCode && !e.target.wait) {
+            e.target.wait = true
+            document.getElementById("komentarzInput").value = ""
+            sendNewComment({ productCode: window.productCode, comment: text, id: window.commentsMax + 1 }).then((r) => {
+                addComment(document.getElementsByClassName("zbiorKomentarzy")[0], { "commentContent": text ,"commentPoints":0}, window.commentsLength, true)
+                window.commentsLength++;
+                window.commentsMax++;
+                setTimeout(() => {
+                    e.target.wait = false
+                }, 5000)
+            });
+        } else {
+            setTimeout(() => {
+                document.getElementById("komentarzInput").placeholder = "poczekaj"
+            }, 5000)
+        }
+    })
 }
 //#endregion
 function getProduct(e) {
-    updateInfo(document.getElementById("inputText").value,true)
+    updateInfo(document.getElementById("inputText").value, true)
 }

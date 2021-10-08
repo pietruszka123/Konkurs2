@@ -184,7 +184,7 @@ con.connect(function (erroro) {
         }
     })
     app.post("/updateComment.json", (req, res, next) => {
-        if (req.body && req.body.comment && req.body.productCode) {
+        if (req.body && req.body.commentPoints && req.body.productCode) {
             var sql = `UPDATE ecohelper
         INNER JOIN JSON_TABLE(
           ecohelper.comments,
@@ -197,7 +197,7 @@ con.connect(function (erroro) {
         JSON_REPLACE(
           ecohelper.comments,
           CONCAT('$.comments[', der.rowid - 1, '].commentPoints'),
-          ${req.body.commentPoints + 1})
+          ${req.body.commentPoints})
       WHERE
         ecohelper.codeProduct = ${req.body.productCode};`
             con.query(sql, (err, result, f) => {
