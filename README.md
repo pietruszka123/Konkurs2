@@ -11,4 +11,4 @@ xhr.open("POST", "/getProduct.json", true);
 xhr.setRequestHeader('Content-Type', 'application/json');
 xhr.send(JSON.stringify({productCode:"5449000000996"}));
 ```
-#### ten plik został stworzony przez ...
+#### Aby uruchomić aplikacje należy otworzyć folder z plikami w terminalu/konsoli i wpisać komende "node index.js"
