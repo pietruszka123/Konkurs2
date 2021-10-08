@@ -1,5 +1,6 @@
 document.addEventListener("DOMContentLoaded", function(){
     window.commentsLength = 0
+    window.commentsMax = 0
     var product = document.head.querySelector("[name~=productData][content]").content;
     var productID = document.head.querySelector("[name~=productID][content]");
     console.log(product)
@@ -18,13 +19,30 @@ document.addEventListener("DOMContentLoaded", function(){
         }
     }
 });
+/**
+ * 
+ * @param {Element} addto 
+ * @param {Element} commentObj 
+ * @param {number} i 
+ * @param {boolean} after 
+ */
 function addComment(addto,commentObj,i,after =false){
     var a = `<div class="komentarz">
     <div class="miejsce ${(i < 3) ? `m${i+1}` : ""}"><p>#${i+1}</p></div>
     <div class="wiadomosc">${commentObj.commentContent}<p></p></div>
 </div>`
     addto.insertAdjacentHTML((after) ? 'afterbegin' : 'beforeend',a)
+    if(after){
+        console.dir(addto)
+        var temp = addto.childNodes[0]
+        console.log(temp)
+        addto.childNodes[0].parentNode.insertBefore(addto.childNodes[1],addto.childNodes[0])
+    }
 }
+/**
+ * 
+ * @param {object} r 
+ */
 function setComments(r){
     var comments = r.comments;
     var commentContainer = document.getElementsByClassName("zbiorKomentarzy")[0]
@@ -37,13 +55,20 @@ function setComments(r){
     commentContainer.append(addCommentObj)
     for (let i = 0; i < comments.length; i++) {
         console.log(i)
-        
+        if(comments[i].id && comments[i].id > window.commentsMax){
+            window.commentsMax = comments[i].id
+        }
         console.log(comments[i])
         addComment(commentContainer,comments[i],i)
     }
     initSendComment()
 }
 //#region requests
+/**
+ * 
+ * @param {unknown} toSend 
+ * @returns {object}
+ */
 function sendGetProduct(toSend) {
     return new Promise((resolve, reject) => {
         var xhr = new XMLHttpRequest();
@@ -59,6 +84,12 @@ function sendGetProduct(toSend) {
         xhr.send(JSON.stringify({ productCode: toSend }));
     })
 }
+//#region requests
+/**
+ * 
+ * @param {unknown} toSend 
+ * @returns {object}
+ */
 function sendGetFromDataBase(toSend) {
     return new Promise((resolve, reject) => {
         var xhr = new XMLHttpRequest();
@@ -74,6 +105,12 @@ function sendGetFromDataBase(toSend) {
         xhr.send(JSON.stringify({ productCode: toSend }));
     })
 }
+//#region requests
+/**
+ * 
+ * @param {unknown} toSend 
+ * @returns {object}
+ */
 function sendNewComment(tosend){
     return new Promise((resolve, reject) => {
         var xhr = new XMLHttpRequest();

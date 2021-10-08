@@ -1,8 +1,30 @@
 process.env['NODE_TLS_REJECT_UNAUTHORIZED'] = 0;
 
 const express = require("express");
+var date = new Date();
+datevalues = [
+    date.getFullYear(),
+    date.getMonth(),
+    date.getDate(),
+    date.getHours(),
+    date.getMinutes(),
+    date.getSeconds(),
+ ];
+ const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun",
+ "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
+];
+var fs = require('fs');
+var util = require('util');
+var log_file = fs.createWriteStream(__dirname + `/logs/${datevalues[0]}-${monthNames[datevalues[1]]}-${datevalues[2]}.log`, {flags : 'w'});
+var log_stdout = process.stdout;
 
-const fs = require("fs")
+
+
+console.log = function(d) { //
+
+  log_file.write(`[${datevalues[0]} ${monthNames[datevalues[1]]} ${datevalues[2]} ${datevalues[3]}:${datevalues[4]}:${datevalues[5]}] ${util.format(d)}\n`);
+  log_stdout.write(util.format(d) + '\n');
+};
 
 const mysql = require('mysql');
 
@@ -92,12 +114,41 @@ con.connect(function (erroro) {
             next()
         }
     })
+    app.post("/updateComment.json",(req,res,next)=>{
+        if(req.body && req.body.comment && req.body.productCode){
+        var sql = `UPDATE ecohelper
+        INNER JOIN JSON_TABLE(
+          ecohelper.comments,
+          '$.comments[*]' COLUMNS(
+            rowid FOR ORDINALITY,
+            id INT PATH '$.id'
+          )
+        ) der ON der.id = 0
+      SET ecohelper.comments =
+        JSON_REPLACE(
+          ecohelper.comments,
+          CONCAT('$.comments[', der.rowid - 1, '].commentPoints'),
+          ${req.body.commentPoints + 1})
+      WHERE
+        ecohelper.codeProduct = ${req.body.productCode};`
+        con.query(sql,(err, result, f)=>{
+            if(err){
+                console.log(err)
+                res.writeHead(404, head)
+                res.end(JSON.stringify({error: "Error?"}))
+                return
+            }
+            console.log(result)
+            res.writeHead(200, head)
+            res.end(JSON.stringify({"status":1}))
+        })
+        }
+    })
     app.post("/addComment.json",(req,res,next)=>{
         if(req.body && req.body.comment && req.body.productCode){
             console.log("add")
-            var commentObject = {"commentContent": req.body.comment,"commentPoints": 0}
-            console.log(JSON.stringify(commentObject))
-            var sql = `UPDATE ecohelper SET comments = JSON_ARRAY_APPEND(comments,'$.comments',JSON_OBJECT("commentContent","${commentObject.commentContent}","commentPoints","${commentObject.commentPoints}")) WHERE codeProduct = ${req.body.productCode}`
+            //var commentObject = {"commentContent": req.body.comment,"commentPoints": 0}
+            var sql = `UPDATE ecohelper SET comments = JSON_ARRAY_APPEND(comments,'$.comments',JSON_OBJECT("commentContent","${req.body.comment}","commentPoints","${0}","id","${req.body.id}")) WHERE codeProduct = ${req.body.productCode}`
             console.log(sql)
             con.query(sql,(err, result, f)=>{
                 if(err){
@@ -108,7 +159,7 @@ con.connect(function (erroro) {
                 }
                 console.log(result)
                 res.writeHead(200, head)
-                res.end(JSON.stringify(result))
+                res.end(JSON.stringify({"status":1}))
             })
         }
     })
