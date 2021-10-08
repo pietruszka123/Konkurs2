@@ -132,17 +132,16 @@ function sendNewComment(tosend){
 function noComents(){
     var commentContainer = document.getElementsByClassName("zbiorKomentarzy")[0]
     //if(addCommentObj == undefined)addCommentObj = commentContainer.childNodes[1];
-    //commentContainer.innerHTML = ""
-    //commentContainer.append(addCommentObj)
+    commentContainer.innerHTML = ""
     var text = document.createElement("h3")
     text.style = "font-family: 'Source Sans Pro', sans-serif;"
     if(window.productCode){
         text.textContent = "Brak Komentarzy"
     }
     else{
-        //text.textContent = "Tutaj pojawią się komentarze"
+        text.textContent = "Tutaj pojawią się komentarze"
     } 
-    //commentContainer.append(text)
+    commentContainer.append(text)
 }
 //#endregion
 var addCommentObj;
