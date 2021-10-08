@@ -137,7 +137,7 @@ function GetProductPage(req, res, con, mobile = false) {
     })
 }
 
-var con = mysql.createConnection({
+var con = mysql.createPool({
     host: config["DataBase-host"],
     user: config["DataBase-user"],
     password: config["DataBase-password"],
