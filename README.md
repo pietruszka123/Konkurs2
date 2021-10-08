@@ -1,7 +1,7 @@
 # Konkurs2
 
 
-[strona](https://eco-helper.herokuapp.com/)
+[Strona z projektem](https://eco-helper.herokuapp.com/)
 
 <!-- ## **jak uzyskać produkt z przeglądarki**
 <!-- - javascript -->
