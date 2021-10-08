@@ -3,9 +3,9 @@
     "x-Powered-By": "Gaba",
     "debugLog":false,
     "api-version":"v2",
-    "DataBase-host":"remotemysql.com",
+    "DataBase-host":"sql100.epizy.com",
     "DataBase-port": 3306,
-    "DataBase-user": "W5pYDkQFaT",
-    "DataBase-password":"dYf2pxTyCa",
-    "DataBase-database":"W5pYDkQFaT"
+    "DataBase-user": "epiz_29992921",
+    "DataBase-password":"nowehaslo123",
+    "DataBase-database":"epiz_29992921_ecohelper"
 }
