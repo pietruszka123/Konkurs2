@@ -40,7 +40,7 @@ CREATE TABLE `ecohelper` (
 --
 
 INSERT INTO `ecohelper` (`codeProduct`, `co2Cost`, `comments`, `betterAlternative`, `other`) VALUES
-(5901088009730, 44, '{\"comments\":[{\"commentContent\": \"Pustą butelke po wodzie należy wrzucić do pojemnika z plastikiem\",\"commentPoints\": 5},{\"commentContent\": \"Pustą butelke nalezy wlozyc sobie w dupe\",\"commentPoints\": -15}]}', '{\"alternatives\":[{\"alternativeContent\": \"Butelka filtrująca Dafi\",\"alternativePoints\": 5,\"alternativeImage\": \"https://sklep.dafi.pl/media/catalog/product/cache/1/image/9df78eab33525d08d6e5fb8d27136e95/b/u/butelka-0_5-eko.jpg\"},{\"alternativeContent\": \"Picie z rzeki\",\"alternativePoints\": -15,\"alternativeImage\": \"\"}]}', NULL);
+(5901088009730, 44, '{\"comments\":[{\"commentContent\": \"Pustą butelke po wodzie należy wrzucić do pojemnika z plastikiem\",\"commentPoints\": 5,\"id"\:"0"},{\"commentContent\": \"Pustą butelke nalezy wlozyc sobie w dupe\",\"commentPoints\": -15,\"id"\:"0"}]}', '{\"alternatives\":[{\"alternativeContent\": \"Butelka filtrująca Dafi\",\"alternativePoints\": 5,\"alternativeImage\": \"https://sklep.dafi.pl/media/catalog/product/cache/1/image/9df78eab33525d08d6e5fb8d27136e95/b/u/butelka-0_5-eko.jpg\"},{\"alternativeContent\": \"Picie z rzeki\",\"alternativePoints\": -15,\"alternativeImage\": \"\"}]}', NULL);
 
 --
 -- Indexes for dumped tables
