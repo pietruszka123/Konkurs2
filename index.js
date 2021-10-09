@@ -168,7 +168,7 @@ con.connect(function (erroro) {
                     };
                     if (!result[0]) {
                         res.writeHead(404, head)
-                        res.end(JSON.stringify({ status: 0, error: "Product not found" }))
+                        res.end(JSON.stringify({ status: 1, error: "Product not found" }))
                         sql = `INSERT INTO ecohelper (codeProduct, co2Cost, comments, betterAlternative, other) VALUES
                         ("${kodKreskowy}", 0, '{\"comments\":[]}','\{"alternatives\":[]\}', NULL);`
                         con.query(sql, (err, resu, f) => {
