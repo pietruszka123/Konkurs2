@@ -152,6 +152,8 @@ con.connect(function (erroro) {
     }
 
     app.post("/getProductB.json", (req, res, next) => {
+        console.log(req)
+        console.log(req.body)
         if (req.body && req.body.productCode) {
             if (req.body.productCode.match(/^[0-9]+$/) != null) {
                 var kodKreskowy = parseInt(req.body.productCode)
