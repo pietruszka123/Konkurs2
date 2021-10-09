@@ -223,6 +223,7 @@ con.connect(function (erroro) {
     app.post("/addAlternative.json", (req, res, next) => {
         console.log("addAlt")
         console.log(req.body.alternativeContent)
+        console.log(req.body && req.body.alternativeContent && req.body.alternativeImage && req.body.productCode && req.body.id)
         if (req.body && req.body.alternativeContent && req.body.alternativeImage && req.body.productCode && req.body.id) {
             var sql = `UPDATE ecohelper SET betterAlternative = JSON_ARRAY_APPEND(betterAlternative,'$.alternatives',JSON_OBJECT("alternativeContent","${req.body.alternativeContent}","alternativeImage","${req.body.alternativeImage}","alternativePoints","${0}","id","${req.body.id}")) WHERE codeProduct = ${req.body.productCode}`
             con.query(sql, (err, result, f) => {
