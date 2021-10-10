@@ -3,9 +3,9 @@
     "x-Powered-By": "Gaba",
     "debugLog":false,
     "api-version":"v2",
-    "DataBase-host":"remotemysql.com",
+    "DataBase-host":"sql11.freesqldatabase.com",
     "DataBase-port": 3306,
-    "DataBase-user": "W5pYDkQFaT",
-    "DataBase-password":"dYf2pxTyCa",
-    "DataBase-database":"W5pYDkQFaT"
+    "DataBase-user": "sql11443414",
+    "DataBase-password":"mTQbhsXTkk",
+    "DataBase-database":"sql11443414"
 }
